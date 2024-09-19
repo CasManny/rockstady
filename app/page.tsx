@@ -9,7 +9,7 @@ export default function Home() {
   
   return (
     <>
-      <section className="container">
+      <section className="container bg-white text-black">
         <Header />
         <Hero />
         <WhyRockStaddy />
