@@ -20,7 +20,7 @@ const Header = () => {
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-1">
             <Mountain className="h-10 w-10 text-[#F3BE00]" />
-            <h1 className="font-semibold text-2xl">Rockstady</h1>
+            <h1 className="font-semibold text-2xl">Rockstaddy</h1>
           </div>
           <div className="flex items-center gap-5">
             {headerLinks.map((link, index) => (
