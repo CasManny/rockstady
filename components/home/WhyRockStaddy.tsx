@@ -25,11 +25,11 @@ const benefits = [
 
 const WhyRockStaddy = () => {
   return (
-      <div className='container min-h-[80vh]'>
+      <div className='container min-h-[80vh] p-5 mb:p-10'>
           <h1 className='text-center text-3xl font-extrabold mb-20'>Why you will Love <br /> <span className='border-b border-dotted border-rs-yellow'>Rockstaddy 👌</span></h1>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-10">
               {benefits.map((benefit, index) => (
-                  <div className="text-center">
+                  <div className="text-center mb-4 md:mb-0">
                       <benefit.icon className='h-10 w-10 mb-10 mx-auto text-rs-yellow' />
                       <h3 className='font-semibold text-xl mb-4'>{benefit.label}</h3>
                       <p>{ benefit.details}</p>

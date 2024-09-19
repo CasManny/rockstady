@@ -1,30 +1,42 @@
-"use client";
-import React from "react";
-import { Button } from "../ui/button";
-import { ArrowRight, Mountain } from "lucide-react";
+"use client"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ArrowRight, Menu, Mountain } from "lucide-react";
 import Link from "next/link";
-import Sidebar from "./Sidebar";
+import { Button } from "../ui/button";
 
 const headerLinks = [
-  {
-    name: "Pricing",
-    href: "/",
-  },
-  {
-    name: "About",
-    href: "/",
-  },
-];
-const Header = () => {
+    {
+      name: "Pricing",
+      href: "/pricing",
+    },
+    {
+      name: "About",
+      href: "/about",
+    },
+  ];
+
+const Sidebar = () => {
   return (
-    <header className="p-5 md:p-8 z-50 sticky top-0 shadow-sm bg-white">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-10">
+    <Sheet>
+      <SheetTrigger>
+        <Menu className="h-8 w-8 lg:hidden" />
+      </SheetTrigger>
+      <SheetContent side={'top'} className="bg-white h-full">
+      <div>
+      <div className="">
+        <div className="flex flex-col gap-10">
           <div className="flex items-center gap-1">
             <Mountain className="h-10 w-10 text-[#F3BE00]" />
             <h1 className="font-semibold text-2xl">Rockstaddy</h1>
           </div>
-          <div className="items-center gap-5 hidden lg:flex">
+          <div className="flex flex-col gap-5">
             {headerLinks.map((link, index) => (
               <Link
                 href={link.href}
@@ -36,7 +48,7 @@ const Header = () => {
             ))}
           </div>
         </div>
-        <div className="gap-2 ml-auto hidden lg:flex">
+        <div className="gap-2 grid md:grid-cols-2 mt-10 grid-cols-1">
           <Button
             variant={"outline"}
             className="rounded-2xl text-lg hover:bg-rs-yellow hover:text-black"
@@ -47,10 +59,11 @@ const Header = () => {
             Sign up for free
           </Button>
         </div>
-        <Sidebar />
       </div>
-    </header>
+    </div>
+      </SheetContent>
+    </Sheet>
   );
 };
 
-export default Header;
+export default Sidebar;

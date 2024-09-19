@@ -6,6 +6,7 @@ import WhyRockStaddy from "@/components/home/WhyRockStaddy";
 
 
 export default function Home() {
+  
   return (
     <>
       <section className="container">
