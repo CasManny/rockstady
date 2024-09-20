@@ -1,9 +1,9 @@
-"use client";
 import React from "react";
 import { Button } from "../ui/button";
 import { ArrowRight, Mountain } from "lucide-react";
 import Link from "next/link";
 import Sidebar from "./Sidebar";
+import { auth } from "@clerk/nextjs/server";
 
 const headerLinks = [
   {
@@ -16,6 +16,7 @@ const headerLinks = [
   },
 ];
 const Header = () => {
+  const { userId } = auth();
   return (
     <header className="p-5 md:p-8 z-50 sticky top-0 shadow-sm bg-white">
       <div className="flex justify-between items-center">
@@ -36,17 +37,29 @@ const Header = () => {
             ))}
           </div>
         </div>
-        <div className="gap-2 ml-auto hidden lg:flex">
-          <Button
-            variant={"outline"}
-            className="rounded-2xl text-lg hover:bg-rs-yellow hover:text-black"
-          >
-            Login <ArrowRight />
-          </Button>
-          <Button className="rounded-2xl bg-rs-yellow font-extrabold text-black hover:bg-rs-yellow/90 tracking-widest">
-            Sign up for free
-          </Button>
-        </div>
+        {userId ? (
+          <Link href={"/choose-an-adventure"} className="ml-auto hidden lg:flex">
+            <Button className="rounded-2xl bg-rs-yellow font-extrabold text-black hover:bg-rs-yellow/90 tracking-widest">
+              Improve Today
+            </Button>
+          </Link>
+        ) : (
+          <div className="gap-2 ml-auto hidden lg:flex">
+            <Link href={"/sign-in"}>
+              <Button
+                variant={"primaryOutline"}
+                className="rounded-2xl text-lg hover:bg-rs-yellow hover:text-black"
+              >
+                Login <ArrowRight />
+              </Button>
+            </Link>
+            <Link href={"/sign-up"}>
+              <Button className="rounded-2xl bg-rs-yellow font-extrabold text-black hover:bg-rs-yellow/90 tracking-widest">
+                Sign up for free
+              </Button>
+            </Link>
+          </div>
+        )}
         <Sidebar />
       </div>
     </header>

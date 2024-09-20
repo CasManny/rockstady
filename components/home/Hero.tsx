@@ -1,7 +1,10 @@
+import { auth } from "@clerk/nextjs/server";
 import { Button } from "../ui/button";
 import AnimateLogo from "./AnimateLogo";
+import Link from "next/link";
 
 const Hero = () => {
+  const { userId } = auth();
   return (
     <div className="container mt-10 min-h-[80vh] p-5 w-full">
       <div className="">
@@ -14,14 +17,26 @@ const Hero = () => {
           <br /> stay ahead in your career and life.
         </p>
       </div>
-      <div className="mt-7 flex gap-4 flex-col md:flex-row">
-        <Button className="rounded-2xl bg-rs-yellow font-extrabold text-black hover:bg-rs-yellow/90 tracking-widest">
-          Sign up for free
-        </Button>
-        <Button variant={"outline"} className="rounded-2xl ">
-          Browse Books
-        </Button>
-      </div>
+      {userId ? (
+        <Link href={"/choose-an-adventure"} className="">
+          <Button className="mt-5 bg-rs-yellow hover:bg-rs-yellow/90 font-extrabold tracking-widest">
+            Improve Today
+          </Button>
+        </Link>
+      ) : (
+        <div className="mt-7 flex gap-4 flex-col md:flex-row">
+          <Link href={"/sign-up"}>
+            <Button className="rounded-2xl bg-rs-yellow font-extrabold text-black hover:bg-rs-yellow/90 tracking-widest">
+              Sign up for free
+            </Button>
+          </Link>
+          <Link href={"/sign-in"}>
+            <Button variant={"default"} className="rounded-2xl ">
+              Browse Books
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
