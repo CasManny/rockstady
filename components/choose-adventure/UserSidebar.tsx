@@ -16,6 +16,11 @@ const sidebarLinks = [
     iconSrc: "/learn.svg",
   },
   {
+    label: "Improve Today",
+    href: "/start-your-journey",
+    iconSrc: "/open-book.png",
+  },
+  {
     label: "Leaderboard",
     href: "/leaderboard",
     iconSrc: "/leaderboard.svg",

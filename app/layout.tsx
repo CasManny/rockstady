@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Poppins } from 'next/font/google'
 import "./globals.css";
 import { ClerkProvider } from  '@clerk/nextjs'
+import ToastProvider from "@/providers/ToastProvider";
 
 
 
@@ -14,7 +15,7 @@ const poppins = Poppins({
 
 
 export const metadata: Metadata = {
-  title: "Rockstady",
+  title: "Rockstaddy",
   description: "Making reading fun with just like an adventure Game",
 };
 
@@ -29,7 +30,8 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
-        {children}
+          {children}
+          <ToastProvider />
       </body>
     </html>
 

@@ -6,7 +6,7 @@ import Link from "next/link";
 const Hero = () => {
   const { userId } = auth();
   return (
-    <div className="container mt-10 min-h-[80vh] p-5 w-full">
+    <div className="container mt-10 min-h-[80vh] p-5 w-full animate__animated animate__zoomInDown">
       <div className="">
         <AnimateLogo />
         <h1 className="lg:text-4xl text-2xl font-semibold mb-4">
