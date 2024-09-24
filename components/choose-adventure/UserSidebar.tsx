@@ -17,7 +17,7 @@ const sidebarLinks = [
   },
   {
     label: "Improve Today",
-    href: "/start-your-journey",
+    href: "/start-journey",
     iconSrc: "/open-book.png",
   },
   {

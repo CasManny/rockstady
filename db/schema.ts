@@ -10,8 +10,9 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const books = pgTable("books", {
-  id: text('id').primaryKey().notNull(),
+  id: text('id').primaryKey(),
   title: text("title").notNull(),
+  subTitle: text("sub_title"),
   author: text("author").notNull(),
   publish: boolean("publish").default(false),
   description: text("description").notNull(),
@@ -25,9 +26,7 @@ export const booksRelations = relations(books, ({ many }) => ({
 
 export const chapters = pgTable("chapters", {
   id: serial("id").primaryKey(),
-  bookId: text("book_id")
-    .notNull()
-    .references(() => books.id, { onDelete: "cascade" }),
+  bookId: text("book_id").references(() => books.id, { onDelete: "cascade" }).notNull(),
   chapterTitle: text("chapter_title").notNull(),
   order: serial("order").notNull(),
 });
@@ -42,9 +41,7 @@ export const chaptersRelations = relations(chapters, ({ many, one }) => ({
 
 export const lessons = pgTable("lessons", {
   id: serial("id").primaryKey(),
-  chapterId: integer("chapter_id")
-    .references(() => chapters.id)
-    .notNull(),
+  chapterId: integer("chapter_id").references(() => chapters.id, { onDelete: "cascade"}).notNull(),
   lessonTitle: text("lesson_title").notNull(),
   introduction: text("introductiion").notNull(),
   mainIdea: text("main_idea"),
@@ -66,9 +63,7 @@ export const challengesEnum = pgEnum("type", ["SELECT", "TYPEIT"]);
 
 export const challenges = pgTable("challenges", {
   id: serial("id").primaryKey(),
-  lessonId: integer("lesson_id")
-    .notNull()
-    .references(() => lessons.id),
+  lessonId: integer("lesson_id").references(() => lessons.id, { onDelete: 'cascade'}).notNull(),
   question: text("question").notNull(),
   type: challengesEnum("type").notNull(),
   order: serial("order").notNull(),
@@ -85,9 +80,7 @@ export const challengesRelations = relations(challenges, ({ one, many }) => ({
 
 export const challengesOptions = pgTable("challengesOption", {
   id: serial("id").primaryKey(),
-  challengeId: integer("challenge_id")
-    .notNull()
-    .references(() => challenges.id, { onDelete: 'cascade'}),
+  challengeId: integer("challenge_id").references(() => challenges.id, { onDelete: 'cascade'}).notNull(),
   order: serial("order").notNull(),
   isCorrect: boolean("is_correct"),
   textOption: text("text_option"),
@@ -107,9 +100,7 @@ export const challengesOptionsRelations = relations(
 export const challengeProgress = pgTable("challenge_progress", {
   id: serial("id").primaryKey(),
   userId: text("user_id").notNull(),
-  challengeId: integer("challenge_id")
-    .notNull()
-    .references(() => challenges.id, { onDelete: 'cascade'}),
+  challengeId: integer("challenge_id").references(() => challenges.id, { onDelete: 'cascade'}).notNull(),
   completed: boolean("completed").notNull().default(false),
 });
 
@@ -127,7 +118,7 @@ export const userProgress = pgTable("user_progress", {
   id: serial("id").primaryKey(),
   userId: text("user_id").notNull(),
   userImage: text("user_image").notNull(),
-  activeBookId: text("active_book_id").notNull().references(() => books.id, { onDelete: "cascade"}),
+  activeBookId: text("active_book_id").references(() => books.id, { onDelete: "cascade"}).notNull(),
   hearts: integer("hearts").default(5).notNull(),
   points: integer("points").notNull().default(0),
 });
@@ -142,7 +133,7 @@ export const userProgressRelation = relations(userProgress, ({ one }) => ({
 export const userSubscription = pgTable("user_subscription", {
   id: serial("id").primaryKey(),
   userId: text("user_id").notNull(),
-  stripeCustomerId: text("stripe_customer_id").notNull().unique(),
+  stripeCustomerId: text("stripe_customer_id").unique().notNull(),
   stripeSubscriptionId: text("stripe_subscription_id").notNull().unique(),
   stripePriceId: text("stripe_price_id").notNull(),
   stripeCurrentPeroidEnd: timestamp("stripe_current_period_end").notNull(),

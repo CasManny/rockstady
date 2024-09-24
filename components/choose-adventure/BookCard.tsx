@@ -30,7 +30,7 @@ const BookCard = ({
     >
       <div className="min-[24px] w-full flex items-center justify-end">
         {active ? (
-          <div className="rounded-md bg-green-600 flex items-center justify-center p-1.5">
+          <div className="rounded-md bg-rs-yellow flex items-center justify-center p-1.5">
             <PackageOpen className="text-white stroke-[1.5] w-4 h-4" />
           </div>
         ) : (

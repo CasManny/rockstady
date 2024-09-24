@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { cache } from "react";
 import db from "./drizzle";
 import { eq } from "drizzle-orm";
-import { books, chapters, userProgress } from "./schema";
+import { books, challengeProgress, chapters, lessons, userProgress } from "./schema";
 
 export const getBooks = cache(async () => {
     const { userId } = auth()
@@ -50,4 +50,51 @@ export const getBookById = cache(async (bookId: string) => {
     })
 
     return book
+})
+
+export const getUserProgress = cache(async () => {
+    const { userId } = auth()
+    if (!userId) {
+        redirect('/start-journey')
+    }
+
+    const userProgess = await db.query.userProgress.findFirst({
+        where: eq(userProgress.userId, userId),
+        with: {
+            activeBook: true
+        }
+    })
+
+    return userProgess
+})
+
+export const getLessonsFromActiveBook = cache(async () => {
+    const { userId } = auth()
+    if (!userId) {
+        redirect("/sign-in")
+    }
+
+
+    const activeBookUserIsReading = await getUserProgress()
+    if (!userId || !activeBookUserIsReading?.activeBook) {
+        return []
+    }
+
+    const data = await db.query.chapters.findMany({
+        where: eq(chapters.bookId, activeBookUserIsReading.activeBookId),
+        with: {
+            lessons: {
+                orderBy: (lessons, { asc }) => [asc(lessons.order)],
+                with: {
+                    challenges: {
+                        with: {
+                            challengeProgress: {
+                                where: eq(challengeProgress.userId, userId)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+   })
 })

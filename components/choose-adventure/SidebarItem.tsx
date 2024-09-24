@@ -13,7 +13,7 @@ type Props = {
 };
 const SidebarItem = ({ label, iconSrc, href }: Props) => {
   const pathname = usePathname();
-  const active = pathname === href;
+  const active = pathname.startsWith(href);
   return (
     <Button
       variant={active ? "sidebarOutline" : "sidebar"}

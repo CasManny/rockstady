@@ -3,19 +3,19 @@ import Footer from "@/components/home/Footer";
 import Header from "@/components/home/Header";
 import Hero from "@/components/home/Hero";
 import WhyRockStaddy from "@/components/home/WhyRockStaddy";
-import 'animate.css'
-
+import "animate.css";
 
 export default function Home() {
-  
   return (
     <>
-      <section className="container bg-white text-black">
-        <Header />
-        <Hero />
-        <WhyRockStaddy />
-        <BooksCategory />
-        <Footer />
+      <section className="bg-white text-black">
+        <div className="container">
+          <Header />
+          <Hero />
+          <WhyRockStaddy />
+          <BooksCategory />
+          <Footer />
+        </div>
       </section>
     </>
   );

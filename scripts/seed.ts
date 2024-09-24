@@ -10,7 +10,8 @@ const db = drizzle(sql, { schema });
 const main = async () => {
   try {
     console.log("Seeding process started...");
-    await db.delete(schema.books), await db.delete(schema.chapters);
+      await db.delete(schema.books)
+    await db.delete(schema.chapters);
     await db.delete(schema.lessons);
     await db.delete(schema.challenges);
     await db.delete(schema.challengesOptions);
@@ -22,6 +23,7 @@ const main = async () => {
       {
         id: "1",
         title: "Mastery",
+        subTitle: "unlocking the strategy of masters",
         author: "Robert Greene",
         description:
           "Learning how to become a master in a particular skill, moving throught phases of apprentice to masters",
@@ -29,6 +31,7 @@ const main = async () => {
       {
         id: "2",
         title: "Unlock it",
+        subTitle: "Bringing out the better version of you",
         author: "Dan Lok",
         description:
           "Exposing the strength behind self moltivation and determination in achieveing success at different level in health, buisiness and relationship",
@@ -36,12 +39,14 @@ const main = async () => {
       {
         id: "3",
         title: "Hooked",
+        subTitle: "Habit Forming product",
         author: "Nir Eyal",
         description: "How to build eye catching product for your users",
       },
       {
         id: "4",
         title: "Million Dollar Weekend",
+        subTitle: "Bootstrapping a business under one week",
         author: "Noah Kahan",
         description:
           "Getting knowledge on the easiest way to launch a product within a week and make millions of dollar",
@@ -125,67 +130,65 @@ const main = async () => {
       },
       {
         id: 3,
-    lessonId: 1, // Assuming this lesson exists
-    question: "What are data types?",
-    type: "SELECT",
-    order: 1,
+        lessonId: 1, // Assuming this lesson exists
+        question: "What are data types?",
+        type: "SELECT",
+        order: 1,
       },
     ]);
-      
-      await db.insert(schema.challengesOptions).values([
-          {
-              challengeId: 1,
-              isCorrect: true,
-              textOption: "variables are used to store values"
-          },
-          {
-              challengeId: 1,
-              isCorrect: false,
-              textOption: "variables are for jokes"
-          },
-          {
-              challengeId: 1,
-              isCorrect: false,
-              textOption: "variables are used by fools",
-              
-          },
-          {
-              challengeId: 1,
-              isCorrect: false,
-              textOption: "variables are used by beginners in the industry",
 
-          }
-      ])
-      await db.insert(schema.challengesOptions).values([
-          {
-              challengeId: 2,
-              textOption: "Explain the difference between local and global variables.",
+    await db.insert(schema.challengesOptions).values([
+      {
+        challengeId: 1,
+        isCorrect: true,
+        textOption: "variables are used to store values",
+      },
+      {
+        challengeId: 1,
+        isCorrect: false,
+        textOption: "variables are for jokes",
+      },
+      {
+        challengeId: 1,
+        isCorrect: false,
+        textOption: "variables are used by fools",
+      },
+      {
+        challengeId: 1,
+        isCorrect: false,
+        textOption: "variables are used by beginners in the industry",
+      },
+    ]);
+    await db.insert(schema.challengesOptions).values([
+      {
+        challengeId: 2,
+        textOption:
+          "Explain the difference between local and global variables.",
+      },
+    ]);
 
-          }
-      ])
-
-      await db.insert(schema.challengesOptions).values([
-          {
-              challengeId: 3,
-              isCorrect: false,
-              textOption: "data types are nonsense"
-          },
-          {
-              challengeId: 3,
-              isCorrect: true,
-              textOption: "data types are different ways data is stored"
-          },
-          {
-              challengeId: 3,
-              isCorrect: false,
-              textOption: "data types are for children"
-          },
-          {
-              challengeId: 3,
-              isCorrect: false,
-              textOption: "data types are a joke"
-          }
-      ])
+    await db.insert(schema.challengesOptions).values([
+      {
+        challengeId: 3,
+        isCorrect: false,
+        textOption: "data types are nonsense",
+      },
+      {
+        challengeId: 3,
+        isCorrect: true,
+        textOption: "data types are different ways data is stored",
+      },
+      {
+        challengeId: 3,
+        isCorrect: false,
+        textOption: "data types are for children",
+      },
+      {
+        challengeId: 3,
+        isCorrect: false,
+        textOption: "data types are a joke",
+      },
+    ]);
 
     console.log("Seeding process elnded...");
   } catch (error) {
