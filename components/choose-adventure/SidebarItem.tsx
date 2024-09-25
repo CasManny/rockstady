@@ -17,7 +17,7 @@ const SidebarItem = ({ label, iconSrc, href }: Props) => {
   return (
     <Button
       variant={active ? "sidebarOutline" : "sidebar"}
-      className={cn(`justify-start h-[52px] hover:bg-rs-yellow/70`, active && 'bg-rs-yellow text-white')}
+      className={cn(`justify-start h-[52px] hover:bg-rs-yellow/70`, active && 'bg-rs-yellow/70 text-white')}
       asChild
     >
       <Link href={href}>
