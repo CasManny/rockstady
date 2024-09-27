@@ -28,7 +28,7 @@ export const chapters = pgTable("chapters", {
   id: serial("id").primaryKey(),
   bookId: text("book_id").references(() => books.id, { onDelete: "cascade" }).notNull(),
   chapterTitle: text("chapter_title").notNull(),
-  order: serial("order").notNull(),
+  order: integer('order').notNull(),
 });
 
 export const chaptersRelations = relations(chapters, ({ many, one }) => ({
@@ -43,12 +43,9 @@ export const lessons = pgTable("lessons", {
   id: serial("id").primaryKey(),
   chapterId: integer("chapter_id").references(() => chapters.id, { onDelete: "cascade"}).notNull(),
   lessonTitle: text("lesson_title").notNull(),
-  introduction: text("introductiion").notNull(),
-  mainIdea: text("main_idea"),
-  supportingIdea: text("supporting_idea"),
-  summary: text("summary"),
+  summary: text("summary").notNull(),
   infographics: text("info_graphics"),
-  order: serial("order").notNull(),
+  order: integer("order").notNull()
 });
 
 export const lessonsRelations = relations(lessons, ({ one, many }) => ({
@@ -66,7 +63,7 @@ export const challenges = pgTable("challenges", {
   lessonId: integer("lesson_id").references(() => lessons.id, { onDelete: 'cascade'}).notNull(),
   question: text("question").notNull(),
   type: challengesEnum("type").notNull(),
-  order: serial("order").notNull(),
+  order: integer("order").notNull(),
 });
 
 export const challengesRelations = relations(challenges, ({ one, many }) => ({
@@ -81,7 +78,7 @@ export const challengesRelations = relations(challenges, ({ one, many }) => ({
 export const challengesOptions = pgTable("challengesOption", {
   id: serial("id").primaryKey(),
   challengeId: integer("challenge_id").references(() => challenges.id, { onDelete: 'cascade'}).notNull(),
-  order: serial("order").notNull(),
+  order: integer("order").notNull(),
   isCorrect: boolean("is_correct"),
   textOption: text("text_option"),
   info_graphics: text("info_graphics"),

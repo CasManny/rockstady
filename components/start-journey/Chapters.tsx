@@ -1,4 +1,4 @@
-import { lessons } from "@/db/schema";
+import { chapters, lessons, challenges } from "@/db/schema";
 import ChapterBanner from "./ChapterBanner";
 import LessonButton from "./LessonButton";
 
@@ -8,7 +8,7 @@ type Props = {
   description?: string;
   order?: number;
   lessons: (typeof lessons.$inferSelect & { completed: boolean })[],
-  activeLesson: any,
+  activeLesson: (typeof lessons.$inferSelect & { challenges: typeof challenges.$inferSelect}) | undefined,
   activeLessonPercentage: number
 }
 const Chapters = ({id, title, description, order, lessons, activeLesson, activeLessonPercentage}: Props) => {

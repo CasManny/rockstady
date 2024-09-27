@@ -4,7 +4,8 @@ import FeedWrapper from "@/components/start-journey/FeedWrapper";
 import StickyWrapper from "@/components/start-journey/StickyWrapper";
 import UserProgressCard from "@/components/start-journey/UserProgressCard";
 import { getActiveBookLessons, getBookProgress, getLessonPercentage, getUserProgress } from "@/db/queries";
-import { lessons } from "@/db/schema";
+import { lessons, chapters as chapterSchema, challenges } from "@/db/schema";
+import { redirect } from "next/navigation";
 
 const StartJourney = async () => {
   const userProgressData = getUserProgress();
@@ -15,11 +16,14 @@ const StartJourney = async () => {
     userProgressData,
     bookChaptersData,
     bookProgressLevelData,
-    lessonPercentageData
+    lessonPercentageData,
 
   ]);
-    
-  console.log(bookProgress)
+
+  if (!bookProgress) {
+    redirect("/choose-an-adventure")
+  }
+
   return (
     <div className="flex flex-row-reverse">
       <StickyWrapper>
@@ -40,7 +44,7 @@ const StartJourney = async () => {
               id={chapter.id}
               title={chapter.chapterTitle}
               lessons={chapter.lessons}
-              activeLesson={bookProgress.activeLesson}
+              activeLesson={bookProgress.activeLesson as (typeof lessons.$inferSelect & { challenges: typeof challenges.$inferSelect}) | undefined}
               activeLessonPercentage={lessonPercentage}
             />
           </div>

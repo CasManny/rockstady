@@ -58,16 +58,19 @@ const main = async () => {
         id: 1,
         bookId: "1",
         chapterTitle: "Introduction",
+        order: 1,
       },
       {
         id: 2,
         bookId: "1",
         chapterTitle: "First Chapter",
+        order: 2
       },
       {
         id: 3,
         bookId: "1",
         chapterTitle: "second Chapter",
+        order: 3,
       },
     ]);
 
@@ -76,40 +79,22 @@ const main = async () => {
         id: 1,
         chapterId: 1, // Assuming this chapter exists
         lessonTitle: "Introduction to Programming",
-        introduction: "This lesson introduces the basics of programming.",
-        mainIdea:
-          "Programming is the process of creating a set of instructions for a computer to follow.",
-        supportingIdea:
-          "Understanding programming fundamentals is essential for software development.",
-        summary:
-          "In this lesson, we covered the basic concepts of programming, including variables, data types, and control structures.",
+        summary:"In this lesson, we covered the basic concepts of programming, including variables, data types, and control structures.",
+        order: 1,
       },
       {
         id: 2,
         chapterId: 1, // Assuming this chapter exists
         lessonTitle: "Variables and Data Types",
-        introduction:
-          "Learn about variables and different data types in programming.",
-        mainIdea: "Variables are used to store data values.",
-        supportingIdea:
-          "Data types define the type of data that can be stored in a variable.",
-        summary:
-          "This lesson explains how to declare variables and the importance of data types in programming.",
+        summary: "This lesson explains how to declare variables and the importance of data types in programming.",
+        order: 2
       },
       {
         id: 3,
         chapterId: 1, // Assuming this chapter exists
         lessonTitle: "Control Structures",
-        introduction:
-          "Control structures allow you to dictate the flow of your program.",
-        mainIdea:
-          "Control structures include conditional statements and loops.",
-        supportingIdea:
-          "They are essential for making decisions in code execution.",
-        summary:
-          "In this lesson, we discussed if-else statements, switch cases, and loops such as for and while.",
-        infographics: "url_to_infographic_3.png",
-        order: 1,
+        summary: "In this lesson, we discussed if-else statements, switch cases, and loops such as for and while.",
+        order: 3,
       },
     ]);
 
@@ -142,26 +127,31 @@ const main = async () => {
         challengeId: 1,
         isCorrect: true,
         textOption: "variables are used to store values",
+        order: 1,
       },
       {
         challengeId: 1,
         isCorrect: false,
         textOption: "variables are for jokes",
+        order: 2,
       },
       {
         challengeId: 1,
         isCorrect: false,
         textOption: "variables are used by fools",
+        order: 3
       },
       {
         challengeId: 1,
         isCorrect: false,
         textOption: "variables are used by beginners in the industry",
+        order: 4,
       },
     ]);
     await db.insert(schema.challengesOptions).values([
       {
         challengeId: 2,
+        order: 1,
         textOption:
           "Explain the difference between local and global variables.",
       },
@@ -172,21 +162,25 @@ const main = async () => {
         challengeId: 3,
         isCorrect: false,
         textOption: "data types are nonsense",
+        order: 1,
       },
       {
         challengeId: 3,
         isCorrect: true,
         textOption: "data types are different ways data is stored",
+        order: 2
       },
       {
         challengeId: 3,
         isCorrect: false,
         textOption: "data types are for children",
+        order: 3,
       },
       {
         challengeId: 3,
         isCorrect: false,
         textOption: "data types are a joke",
+        order: 4
       },
     ]);
 

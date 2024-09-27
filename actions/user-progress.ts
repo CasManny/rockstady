@@ -5,6 +5,7 @@ import { getActiveUserProgress, getBookById } from "@/db/queries"
 import { userProgress } from "@/db/schema"
 import { currentUser } from "@clerk/nextjs/server"
 import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 
 export const upsertUserProgress = async (bookId: string) => {
     const user = await currentUser()
@@ -28,6 +29,7 @@ export const upsertUserProgress = async (bookId: string) => {
             userImage: user.imageUrl || ""
         })
         revalidatePath("/choose-an-adventure")
+        redirect(`/start-journey/${bookId}`)
     }
 
     await db.insert(userProgress).values({
@@ -37,5 +39,6 @@ export const upsertUserProgress = async (bookId: string) => {
     })
 
     revalidatePath('/choose-an-adventure')
+    redirect(`/start-journey/${bookId}`)
     
 }

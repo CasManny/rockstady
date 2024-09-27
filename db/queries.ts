@@ -72,7 +72,7 @@ export const getUserProgress = cache(async () => {
   });
 
   if (!userProgess) {
-    redirect("start-journey");
+    redirect("choose-an-adventure");
   }
 
   return userProgess;
@@ -112,7 +112,7 @@ export const getActiveBookLessons = cache(async () => {
   });
 
   if (!bookData) {
-    return [];
+    redirect("/choose-an-adventure");
   }
 
   const normalizedData = bookData.map((chapter) => {
@@ -146,7 +146,7 @@ export const getBookProgress = cache(async () => {
   const activeBookUserIsReading = await getActiveUserProgress();
 
   if (!userId || !activeBookUserIsReading?.activeBookId) {
-    redirect("/start-journey");
+    redirect("/choose-an-adventure");
   }
 
   const chaptersInBook = await db.query.chapters.findMany({
@@ -247,3 +247,5 @@ export const getLessonPercentage = cache(async () => {
 
   return percentage;
 });
+
+
