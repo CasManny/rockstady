@@ -4,6 +4,7 @@ import { Poppins } from 'next/font/google'
 import "./globals.css";
 import { ClerkProvider } from  '@clerk/nextjs'
 import ToastProvider from "@/providers/ToastProvider";
+import ExitModal from "@/components/modals/ExistLessonModal";
 
 
 
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
           {children}
           <ToastProvider />
+          <ExitModal />
       </body>
     </html>
 

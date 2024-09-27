@@ -14,14 +14,19 @@ const LessonPage = async () => {
   if (!lesson || !userProgress) {
     redirect("/choose-an-adventure");
   }
-  console.log(lesson);
   const initialPercentage =
     (lesson.challenges.filter((challenge) => challenge.completed).length /
       lesson.challenges.length) *
     100;
   return (
-    <div>
-      <BookQuiz initialPercentage={initialPercentage} initialHearts={userProgress.hearts}/>
+    <div className="pb-10">
+      <BookQuiz
+        initialLessonId={lesson.id}
+        initialPercentage={initialPercentage}
+        initialHearts={userProgress.hearts}
+        initialLessonChallenges={lesson.challenges}
+        lessonSummary={lesson.summary}
+      />
     </div>
   );
 };
