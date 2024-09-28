@@ -3,7 +3,7 @@ type Props = {
 }
 const LessonLayout = ({children}: Props) => {
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full bg-white text-black">
             <div className="flex flex-col h-full w-full">
                 {children}
             </div>

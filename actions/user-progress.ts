@@ -1,44 +1,41 @@
-"use server"
+"use server";
 
-import db from "@/db/drizzle"
-import { getActiveUserProgress, getBookById } from "@/db/queries"
-import { userProgress } from "@/db/schema"
-import { currentUser } from "@clerk/nextjs/server"
-import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
+import db from "@/db/drizzle";
+import { getBookById, getUserProgress } from "@/db/queries";
+import { books, userProgress } from "@/db/schema";
+import { currentUser } from "@clerk/nextjs/server";
+import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export const upsertUserProgress = async (bookId: string) => {
-    const user = await currentUser()
-    if (!user) return null
+  const user = await currentUser();
+  if (!user) return;
 
-    const book = await getBookById(bookId)
-    if (!book) {
-        return new Error("Book not found.")
-    }
+  const book = await getBookById(bookId)
+  if (!book) return 
 
-    if (!book.chapters.length || !book.chapters[0].lessons.length) {
-        return new Error("Book is Empty")
-    }
-
-    const existingBookProgress = await getActiveUserProgress()
-
-    if (existingBookProgress) {
-        await db.update(userProgress).set({
-            activeBookId: bookId,
-            userId: user.id,
-            userImage: user.imageUrl || ""
-        })
-        revalidatePath("/choose-an-adventure")
-        redirect(`/start-journey/${bookId}`)
-    }
-
-    await db.insert(userProgress).values({
-        activeBookId: bookId,
-        userId: user.id,
-        userImage: user.imageUrl || ""
+  if (book?.chapters.length === 0) {
+    return { error: "empty"}
+  }
+  
+  const activeBookUserIsReading = await getUserProgress()
+  if (activeBookUserIsReading) {
+    await db.update(userProgress).set({
+      activeBookId: activeBookUserIsReading.activeBookId,
+      userId: user.id,
+      userImage:  user.imageUrl
     })
-
-    revalidatePath('/choose-an-adventure')
+    revalidatePath("/choose-an-adventure")
     redirect(`/start-journey/${bookId}`)
-    
-}
+  }
+
+  await db.insert(userProgress).values({
+    userId: user.id,
+    userImage: user.imageUrl,
+    activeBookId: bookId
+  })
+  revalidatePath("/choose-an-adventure")
+  redirect(`/start-journey/${bookId}`)
+
+};

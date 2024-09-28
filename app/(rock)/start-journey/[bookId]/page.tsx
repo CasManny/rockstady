@@ -11,6 +11,9 @@ type Props = {
 const BookDetailsPage = async ({ params }: Props) => {
   const bookData = getBookById(params.bookId);
   const [book] = await Promise.all([bookData]);
+  if (!book) {
+    alert('hello wold')
+  }
   return (
     <div className="p-10 min-h-screen">
       <Image

@@ -3,8 +3,8 @@ import { books, userProgress } from "@/db/schema";
 import BookCard from "./BookCard";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { upsertUserProgress } from "@/actions/user-progress";
 import toast from "react-hot-toast";
+import { upsertUserProgress } from "@/actions/user-progress";
 
 type Props = {
   books: (typeof books.$inferSelect)[];
@@ -21,7 +21,11 @@ const BookList = ({ books, activeBookId }: Props) => {
     }
 
     startTransition(() => {
-      upsertUserProgress(bookId).catch(() => toast.error("Book is empty..."));
+      upsertUserProgress(bookId).then((response) => {
+        if (response?.error === 'empty') {
+          return toast.error("Book is empty 😔")
+        }
+      }).catch(() => toast.error("something went wrong..."))
     });
   };
   return (
