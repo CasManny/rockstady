@@ -19,19 +19,19 @@ const BookList = ({ books, activeBookId }: Props) => {
     if (bookId === activeBookId) {
       return router.push(`/start-journey/${bookId}`);
     }
-
     startTransition(() => {
       upsertUserProgress(bookId).then((response) => {
         if (response?.error === 'empty') {
-          return toast.error("Book is empty 😔")
+          return toast.error("Book is empty ")
         }
-      }).catch(() => toast.error("something went wrong..."))
-    });
+      }).catch(() => toast.error("something went wrong!"))
+    })
   };
   return (
     <div className="gap-4 pt-6 grid grid-cols-1 min-h-screen sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
-      {books.map((book) => (
+      {books.map((book, index) => (
         <BookCard
+          key={index}
           id={book.id}
           disabled={pending}
           title={book.title}

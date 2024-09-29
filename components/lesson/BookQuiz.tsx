@@ -1,7 +1,7 @@
 "use client";
 import { challenges, challengesOptions } from "@/db/schema";
 import QuizHeader from "./QuizHeader";
-import Confetti from 'react-confetti'
+import Confetti from "react-confetti";
 import { useState, useTransition } from "react";
 import LessonSummary from "./LessonSummary";
 import SelectChallenge from "./SelectChallenge";
@@ -12,7 +12,10 @@ import { useAudio, useWindowSize } from "react-use";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import ResultCard from "./ResultCard";
-import { reduceHearts, upsertChallengeProgress } from "@/actions/challenge-progress";
+import {
+  reduceHearts,
+  upsertChallengeProgress,
+} from "@/actions/challenge-progress";
 
 type Props = {
   initialPercentage: number;
@@ -32,12 +35,12 @@ const BookQuiz = ({
   initialLessonChallenges,
   lessonSummary,
 }: Props) => {
-    const [hearts, setHearts] = useState(initialHearts);
-  const [finishAudio] = useAudio({src: "/finish.mp3", autoPlay: true})
-    
+  const [hearts, setHearts] = useState(initialHearts);
+  const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: true });
+  const [userInput, setUserInput] = useState("");
   const [percentage, setPercentage] = useState(initialPercentage);
-    const [pending, startTransition] = useTransition();
-  const { width, height } = useWindowSize()
+  const [pending, startTransition] = useTransition();
+  const { width, height } = useWindowSize();
   const { openHeartModal } = useHeartModalStore();
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });
   const [incorrectAudion, _i, inCorrectControls] = useAudio({
@@ -96,9 +99,11 @@ const BookQuiz = ({
 
             correctControls.play();
             setStatus("correct");
-              setPercentage((prev) => prev + 100 / challenges.length);
+            setPercentage((prev) => prev + 100 / challenges.length);
             // this is a practice
             if (initialPercentage === 100) {
+              setHearts((prev) => Math.min(prev + 1, 5));
+            } else {
               setHearts((prev) => Math.min(prev + 1, 5));
             }
           })
@@ -112,7 +117,7 @@ const BookQuiz = ({
               openHeartModal();
             }
             inCorrectControls.play();
-              setStatus("wrong");
+            setStatus("wrong");
             if (!response?.error) {
               setHearts((prev) => Math.max(prev - 1, 0));
             }
@@ -121,23 +126,97 @@ const BookQuiz = ({
       });
     }
   };
-    
+  const checkUserInput = () => {
+    if (!userInput) {
+      return null;
+    }
+
+    if (status === "wrong") {
+      setStatus("none");
+      return;
+    }
+
+    if (status === "correct") {
+      onNext();
+      setStatus("none");
+      return;
+    }
+    const text = challenge.question.toLowerCase().trim()
+    if (text === userInput.toLowerCase().trim()) {
+      startTransition(() => {
+        upsertChallengeProgress(challenge.id)
+          .then((response) => {
+            if (response?.error === "hearts") {
+              openHeartModal();
+              return;
+            }
+
+            correctControls.play();
+            setStatus("correct");
+            setPercentage((prev) => prev + 100 / challenges.length);
+            // this is a practice
+            if (initialPercentage === 100) {
+              setHearts((prev) => Math.min(prev + 1, 5));
+            } else {
+              setHearts((prev) => Math.min(prev + 1, 5));
+            }
+          })
+          .catch(() => toast.error("something went wrong"));
+      });
+    } else {
+      startTransition(() => {
+        reduceHearts(challenge.id)
+          .then((response) => {
+            if (response?.error === "hearts") {
+              openHeartModal();
+            }
+            inCorrectControls.play();
+            setStatus("wrong");
+            if (!response?.error) {
+              setHearts((prev) => Math.max(prev - 1, 0));
+            }
+          })
+          .catch(() => toast.error("something went wrong"));
+      });
+    }
+  };
+
   if (!challenge) {
     return (
       <>
         {finishAudio}
-        <Confetti recycle={false} numberOfPieces={500} tweenDuration={10000} width={width} height={height} />
+        <Confetti
+          recycle={false}
+          numberOfPieces={500}
+          tweenDuration={10000}
+          width={width}
+          height={height}
+        />
         <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
-          <Image src={'/finish.svg'} alt="finish" className="hidden lg:block" height={100} width={100} />
-          <Image src={'/finish.svg'} alt="finish" className="lg:hidden block" height={50} width={50} />
-          <h1 className="text-xl lg:text-3xl font-bold text-neutral-700">Great Job! <br /> You've completed the lesson</h1>
+          <Image
+            src={"/finish.svg"}
+            alt="finish"
+            className="hidden lg:block"
+            height={100}
+            width={100}
+          />
+          <Image
+            src={"/finish.svg"}
+            alt="finish"
+            className="lg:hidden block"
+            height={50}
+            width={50}
+          />
+          <h1 className="text-xl lg:text-3xl font-bold text-neutral-700">
+            Great Job! <br /> You've completed the lesson
+          </h1>
           <div className="flex items-center gap-x-4 w-full">
-              <ResultCard varaint="points" value={challenges.length * 10} />
-              <ResultCard varaint="hearts" value={hearts} />
+            <ResultCard varaint="points" value={challenges.length * 10} />
+            <ResultCard varaint="hearts" value={hearts} />
           </div>
         </div>
       </>
-    )
+    );
   }
 
   return (
@@ -148,23 +227,32 @@ const BookQuiz = ({
         <QuizHeader hearts={hearts} percentage={percentage} />
         <LessonSummary summary={lessonSummary} />
         {challenge.type === "SELECT" && (
-          <SelectChallenge
-            question={challenge.question}
-            options={options}
-            onSelect={onSelect}
-            selectedOption={selectedOption}
-            type={challenge.type}
-          />
+          <>
+            <SelectChallenge
+              question={challenge.question}
+              options={options}
+              onSelect={onSelect}
+              selectedOption={selectedOption}
+              type={challenge.type}
+            />
+            <QuizFooter
+              onCheck={onContinue}
+              status={status}
+              disabled={pending || !selectedOption}
+            />
+          </>
         )}
 
         {challenge.type === "TYPEIT" && (
-          <TypeChallenge text={challenge.question} />
+          <TypeChallenge
+            text={challenge.question}
+            status={status}
+            disabled={pending || !userInput}
+            userInput={userInput}
+            setUserInput={setUserInput}
+            onCheck={checkUserInput}
+          />
         )}
-        <QuizFooter
-          onCheck={onContinue}
-          status={status}
-          disabled={pending || !selectedOption}
-        />
       </div>
     </>
   );

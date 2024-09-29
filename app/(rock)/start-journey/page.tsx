@@ -20,7 +20,7 @@ const StartJourney = async () => {
 
   ]);
 
-  if (!bookProgress) {
+  if (!bookProgress || !userProgress) {
     redirect("/choose-an-adventure")
   }
 
@@ -29,7 +29,7 @@ const StartJourney = async () => {
       <StickyWrapper>
         <UserProgressCard
           hearts={userProgress.hearts}
-          points={userProgress.points!}
+          points={userProgress.points}
         />
       </StickyWrapper>
       <FeedWrapper>

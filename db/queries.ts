@@ -71,10 +71,6 @@ export const getUserProgress = cache(async () => {
     },
   });
 
-  if (!userProgess) {
-    redirect("choose-an-adventure");
-  }
-
   return userProgess;
 });
 
