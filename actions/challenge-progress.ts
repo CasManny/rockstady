@@ -1,11 +1,13 @@
 "use server";
 
+import { POINT_TO_REFILL } from "@/constants";
 import db from "@/db/drizzle";
 import { getUserProgress } from "@/db/queries";
 import { challengeProgress, challenges, userProgress } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export const upsertChallengeProgress = async (challengeId: number) => {
   const { userId } = auth();
@@ -106,4 +108,24 @@ export const reduceHearts = async (challengeId: number) => {
     revalidatePath("/quests");
     revalidatePath("/start-journey");
     revalidatePath(`/lesson/${lessonId}`);
+}
+
+export const refillHeart = async () => {
+ 
+
+  const userProgressInfo = await getUserProgress()
+
+  if (!userProgressInfo) return 
+  
+  if (userProgressInfo.points > POINT_TO_REFILL) {
+    await db.update(userProgress).set({
+      points: userProgressInfo.points - POINT_TO_REFILL,
+      hearts: 5
+    }).where(eq(userProgress.userId, userProgressInfo.userId))
+  }
+
+  revalidatePath('/leaderboard')
+  revalidatePath(`/start-journey`)
+  revalidatePath('/quests')
+  revalidatePath('/upgrade')
 }

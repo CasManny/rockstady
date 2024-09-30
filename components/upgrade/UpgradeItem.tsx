@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { POINT_TO_REFILL } from "@/constants";
 import { useTransition } from "react";
+import { refillHeart } from "@/actions/challenge-progress";
+import toast from "react-hot-toast";
 
 type Props = {
     hearts: number;
@@ -12,7 +14,10 @@ const UpgradeItem = ({ hearts, points }: Props) => {
     const [pending, startTransition] = useTransition()
     
     const onRefillHearts = () => {
-        
+        if (hearts === 5 || points < POINT_TO_REFILL) return 
+        startTransition(() => {
+            refillHeart().catch(() => toast.error("something went wrong!"))
+        })
     }
   return (
     <div className="flex items-center w-full p-4 gap-x-4 border-t-2">
