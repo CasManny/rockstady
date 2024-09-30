@@ -6,7 +6,7 @@ import Quote from "./Quote";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  text: string;
+  quote: string | null;
   status: "correct" | "wrong" | "completed" | "none";
   disabled?: boolean;
   lessonId?: number;
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const TypeChallenge = ({
-  text,
+  quote,
   status,
   disabled,
   lessonId,
@@ -32,7 +32,7 @@ const TypeChallenge = ({
             <h1 className="font-extrabold text-2xl text-left md:text-2xl">
               Type the quote exactly in the box below
             </h1>
-            <Quote quote={text} />
+            <Quote quote={quote} />
             <Textarea
               className={cn(
                 "border-rs-yellow resize-none h-28 w-full text-xl",

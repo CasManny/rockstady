@@ -109,7 +109,7 @@ const main = async () => {
       {
         id: 2,
         lessonId: 1, // Assuming this lesson exists
-        question: "Explain the difference between local and global variables.",
+        quote: "variables store data",
         type: "TYPEIT", // Assuming this is a valid type in your challengesEnum
         order: 2,
       },
@@ -118,7 +118,7 @@ const main = async () => {
         lessonId: 1, // Assuming this lesson exists
         question: "What are data types?",
         type: "SELECT",
-        order: 1,
+        order: 3,
       },
     ]);
 
@@ -146,14 +146,6 @@ const main = async () => {
         isCorrect: false,
         textOption: "variables are used by beginners in the industry",
         order: 4,
-      },
-    ]);
-    await db.insert(schema.challengesOptions).values([
-      {
-        challengeId: 2,
-        order: 1,
-        textOption:
-          "Explain the difference between local and global variables.",
       },
     ]);
 

@@ -2,7 +2,7 @@ import { challenges, challengesOptions } from "@/db/schema";
 import Challenge from "./Challenge";
 
 type Props = {
-  question: string;
+  question: string | null;
   options: (typeof challengesOptions.$inferSelect)[];
   type: (typeof challenges.$inferSelect)["type"];
   onSelect: (id: number) => void;

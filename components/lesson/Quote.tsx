@@ -3,7 +3,7 @@ import { Terminal } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 type Props = {
-  quote: string;
+  quote: string | null;
 };
 const Quote = ({ quote }: Props) => {
   return (

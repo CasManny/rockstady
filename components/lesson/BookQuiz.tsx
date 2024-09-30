@@ -141,8 +141,8 @@ const BookQuiz = ({
       setStatus("none");
       return;
     }
-    const text = challenge.question.toLowerCase().trim()
-    if (text === userInput.toLowerCase().trim()) {
+    const quote = challenge.quote?.toLowerCase().trim()
+    if (quote === userInput.toLowerCase().trim()) {
       startTransition(() => {
         upsertChallengeProgress(challenge.id)
           .then((response) => {
@@ -245,7 +245,7 @@ const BookQuiz = ({
 
         {challenge.type === "TYPEIT" && (
           <TypeChallenge
-            text={challenge.question}
+            quote={challenge.quote}
             status={status}
             disabled={pending || !userInput}
             userInput={userInput}

@@ -61,7 +61,8 @@ export const challengesEnum = pgEnum("type", ["SELECT", "TYPEIT"]);
 export const challenges = pgTable("challenges", {
   id: serial("id").primaryKey(),
   lessonId: integer("lesson_id").references(() => lessons.id, { onDelete: 'cascade'}).notNull(),
-  question: text("question").notNull(),
+  question: text("question"),
+  quote: text('quote'),
   type: challengesEnum("type").notNull(),
   order: integer("order").notNull(),
 });
