@@ -20,7 +20,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Rockstaddy",
-  description: "Making reading fun with just like an adventure Game",
+  description: "Level up your reading game with Rockstady’s engaging book summaries and quizzes.",
 };
 
 export default function RootLayout({
