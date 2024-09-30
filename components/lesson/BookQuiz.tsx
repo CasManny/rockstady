@@ -69,6 +69,10 @@ const BookQuiz = ({
   };
 
   const onContinue = () => {
+    if (hearts === 0) {
+      openHeartModal()
+      return
+    }
     if (!selectedOption) {
       return null;
     }

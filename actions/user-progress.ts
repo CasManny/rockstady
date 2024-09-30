@@ -25,6 +25,7 @@ export const upsertUserProgress = async (bookId: string) => {
     await db.insert(userProgress).values({
       userId: userId,
       userImage: user.imageUrl,
+      userName: user.username || user.firstName,
       activeBookId: bookId,
     });
 

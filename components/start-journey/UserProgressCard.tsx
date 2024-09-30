@@ -5,8 +5,8 @@ import { Button } from "../ui/button";
 import { Gem } from "lucide-react";
 
 type Props = {
-  hearts: number;
-  points: number;
+  hearts: number | undefined;
+  points: number | undefined;
 };
 
 const UserProgressCard = ({ hearts, points }: Props) => {

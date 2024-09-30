@@ -31,8 +31,8 @@ const sidebarLinks = [
     iconSrc: "/quests.svg",
   },
   {
-    label: "Shop",
-    href: "/shop",
+    label: "Upgrade",
+    href: "/upgrade",
     iconSrc: "/shop.svg",
   },
 ];

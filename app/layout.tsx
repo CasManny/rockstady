@@ -5,6 +5,9 @@ import "./globals.css";
 import { ClerkProvider } from  '@clerk/nextjs'
 import ToastProvider from "@/providers/ToastProvider";
 import ExitModal from "@/components/modals/ExistLessonModal";
+import HeartModal from "@/components/modals/HeartModal";
+import { Suspense } from "react";
+import Loading from "@/components/Loading";
 
 
 
@@ -30,10 +33,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${poppins.className} antialiased`}
-      >
+        >
+
           {children}
           <ToastProvider />
           <ExitModal />
+          <HeartModal />
       </body>
     </html>
 

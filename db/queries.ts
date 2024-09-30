@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 import db from "./drizzle";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import {
   books,
   challengeProgress,
@@ -243,5 +243,18 @@ export const getLessonPercentage = cache(async () => {
 
   return percentage;
 });
+
+export const getLeaderboardData = cache(async () => {
+  const leaderboard = await db.query.userProgress.findMany({
+    orderBy: (userProgress, { desc }) => [desc(userProgress.points)],
+    columns: {
+      userImage: true,
+      userName: true,
+      points: true
+    }
+  })
+
+  return leaderboard
+})
 
 

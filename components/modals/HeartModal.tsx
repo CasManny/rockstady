@@ -63,7 +63,7 @@ const HeartModal = () => {
               variant={"primaryOutline"}
               className="w-full"
               size="lg"
-              onClick={close}
+              onClick={closeHeartModal}
             >
               No Thanks
             </Button>
