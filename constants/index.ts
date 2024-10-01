@@ -23,4 +23,15 @@ export const quests = [
       value: 5000,
     },
   
-  ]
+]
+  
+export const generatebookCode = (): string => {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length
+  let code = ""
+  for (let i = 0; i < 8; i++) {
+    const randomIndex = Math.floor(Math.random() * charactersLength)
+    code += characters.charAt(randomIndex)
+  }
+  return code
+}

@@ -5,7 +5,9 @@ const nextConfig = {
     },
     images: {
         remotePatterns: [
-            {hostname: "www.flaticon.com"}
+            { hostname: "www.flaticon.com" },
+            { hostname: 'utfs.io'},
+            { hostname: 'img.clerk.com'}
         ]
     }
 };

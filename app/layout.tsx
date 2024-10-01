@@ -8,6 +8,7 @@ import ExitModal from "@/components/modals/ExistLessonModal";
 import HeartModal from "@/components/modals/HeartModal";
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
+import AddBookModal from "@/components/modals/AddBookModal";
 
 
 
@@ -39,6 +40,7 @@ export default function RootLayout({
           <ToastProvider />
           <ExitModal />
           <HeartModal />
+          <AddBookModal />
       </body>
     </html>
 
