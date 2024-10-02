@@ -63,7 +63,7 @@ export const challenges = pgTable("challenges", {
   lessonId: integer("lesson_id").references(() => lessons.id, { onDelete: 'cascade'}).notNull(),
   question: text("question"),
   quote: text('quote'),
-  type: challengesEnum("type").notNull(),
+  type: text("type").notNull(),
   order: integer("order").notNull(),
 });
 

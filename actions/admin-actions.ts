@@ -1,7 +1,7 @@
 "use server"
 
 import db from "@/db/drizzle";
-import { books, chapters, lessons } from "@/db/schema";
+import { books, challenges, challengesEnum, challengesOptions, chapters, lessons } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -49,6 +49,8 @@ export const addChapterToBook = async (bookId: string, title: string) => {
     })
 
     revalidatePath(`/admin/books/${bookId}`)
+    revalidatePath(`/start-journey`)
+
 }
 
 export const addLessonToChapter = async (chapterId: number, lessonTitle: string, summary: string) => {
@@ -69,5 +71,62 @@ export const addLessonToChapter = async (chapterId: number, lessonTitle: string,
     })
 
     revalidatePath(`/admin/chapter/${chapterId}`)
+    revalidatePath(`/start-journey/${chapter?.bookId}`)
 
+
+
+
+}
+
+export const addChallenge = async (lessonId: number, question: string, type: string, quote: string) => {
+    const lesson = await db.query.lessons.findFirst({
+        where: eq(lessons.id, lessonId),
+        with: {
+            
+            challenges: {
+                orderBy: (challenges, { desc }) => [desc(challenges.order)]
+            }
+        }
+    })
+    if (!lesson) return 
+    
+    const lastChallengeOrder= lesson?.challenges[0]?.order
+    const newOrder = lastChallengeOrder === undefined ? 0 : lastChallengeOrder + 1
+
+    await db.insert(challenges).values({
+        question: question ? question : null,
+        type: type,
+        order: newOrder,
+        quote: quote ? quote : null,
+        lessonId: lessonId,
+    })
+
+    revalidatePath(`/admin/lesson/${lessonId}`)
+    revalidatePath(`/start-journey`)
+
+
+}
+
+export const addOptionToChallenge = async (challengeId: number, correct: string, option: string) => {
+    const challenge = await db.query.challenges.findFirst({
+        where: eq(challenges.id, challengeId),
+        with: {
+            challengeOptions: {
+                orderBy: (challengesOptions, {desc }) => [desc(challengesOptions.order)]
+            }
+        }
+    })
+    if (!challenge) return
+    const lastChallengeOptionOrder = challenge.challengeOptions[0]?.order
+    const newOrder = lastChallengeOptionOrder === undefined ? 0 : lastChallengeOptionOrder + 1
+
+    await db.insert(challengesOptions).values({
+        challengeId,
+        order: newOrder,
+        isCorrect: correct === 'true' ? true : false,
+        textOption: option
+    })
+
+    revalidatePath(`/admin/lesson/${challengeId}`)
+    revalidatePath(`/start-journey`)
 }

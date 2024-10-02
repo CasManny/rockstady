@@ -1,8 +1,15 @@
-import React from 'react'
+import LessonDetails from '@/components/lessons-challenges/LessonDetails'
+import { getLessonDetails } from '@/db/admin-queries'
+type Props = {
+    params: {lessonId: string}
+}
+const LessonPage = async ({ params }: Props) => {
+    const lessonData = getLessonDetails(parseInt(params.lessonId))
 
-const LessonPage = () => {
+    const [lesson] = await Promise.all([lessonData])
+    if (!lesson) return 
   return (
-    <div>LessonPage</div>
+   <LessonDetails lesson={lesson} />
   )
 }
 
