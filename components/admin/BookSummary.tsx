@@ -7,7 +7,7 @@ type Props = {
 }
 const BookSummary = ({value, setValue}: Props) => {
   return (
-    <ReactQuill theme="snow" value={value} onChange={setValue} />
+    <ReactQuill theme="snow" value={value} onChange={setValue} style={{height: "100%"}} />
   )
 }
 

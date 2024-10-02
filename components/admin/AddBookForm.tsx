@@ -118,7 +118,7 @@ const AddBookForm = () => {
           )}
         />
         <div className="flex justify-between items-center">
-          <Button type="button" onClick={() => closeBookModal()}>Cancel</Button>
+          <Button onClick={() => closeBookModal()}>Cancel</Button>
 
           <Button type="submit" disabled={!isValid || isSubmitting}>
             {isSubmitting ? (
