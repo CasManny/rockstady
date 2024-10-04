@@ -137,3 +137,15 @@ export const userSubscription = pgTable("user_subscription", {
   stripePriceId: text("stripe_price_id").notNull(),
   stripeCurrentPeroidEnd: timestamp("stripe_current_period_end").notNull(),
 });
+
+export const feedbacks = pgTable('feedbacks', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  newFeature: text('new_feature'),
+  change: text('change'),
+  need: text('need'),
+  feel: text('feel'),
+  confused: text('confused'),
+  easy: text('easy'),
+  enjoy: text('enjoy')
+})

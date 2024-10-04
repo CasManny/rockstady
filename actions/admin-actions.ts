@@ -1,7 +1,7 @@
 "use server"
 
 import db from "@/db/drizzle";
-import { books, challenges, challengesEnum, challengesOptions, chapters, lessons } from "@/db/schema";
+import { books, challenges, challengesEnum, challengesOptions, chapters, feedbacks, lessons } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -129,4 +129,23 @@ export const addOptionToChallenge = async (challengeId: number, correct: string,
 
     revalidatePath(`/admin/lesson/${challengeId}`)
     revalidatePath(`/start-journey`)
+}
+
+interface IFeedback {
+    name: string,
+    newFeature: string;
+    change: string,
+    need: string,
+    feel: string,
+    confused: string,
+    easy: string,
+    enjoy: string,
+}
+
+
+export const createFeedback = async (values: IFeedback) => {
+    await db.insert(feedbacks).values({
+        ...values
+    })
+    
 }

@@ -60,3 +60,9 @@ export const getLessonDetails = cache(async (lessonId: number) => {
     
     return lesson
 });
+
+
+export const getAllFeedbacks = cache(async () => {
+  const feedbacks = await db.query.feedbacks.findMany()
+  return feedbacks
+})

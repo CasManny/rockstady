@@ -1,36 +1,28 @@
 "use client";
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-  } from "@/components/ui/alert-dialog"
-  
-const FeedbackModal = () => {
-  return (
-    <AlertDialog>
-    <AlertDialogTrigger>Open</AlertDialogTrigger>
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-        <AlertDialogDescription>
-          This action cannot be undone. This will permanently delete your account
-          and remove your data from our servers.
-        </AlertDialogDescription>
-      </AlertDialogHeader>
-      <AlertDialogFooter>
-        <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction>Continue</AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
-  
-  )
-}
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useFeedbackModalStore } from "@/store/feedback-modal";
+import UserFeedbackForm from "../choose-adventure/UserFeedbackForm";
 
-export default FeedbackModal
+const FeedbackModal = () => {
+  const { isOpen, closeFeedbackModal } = useFeedbackModalStore();
+  return (
+    <AlertDialog open={isOpen} onOpenChange={closeFeedbackModal}>
+      <AlertDialogContent className="bg-white text-black overflow-y-auto h-full">
+        <AlertDialogHeader>
+          <AlertDialogTitle>
+            Send us Your feedback on using the platform
+          </AlertDialogTitle>
+        </AlertDialogHeader>
+        <UserFeedbackForm />
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
+
+export default FeedbackModal;
