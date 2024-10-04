@@ -17,7 +17,7 @@ type Props = {
 };
 
 const LessonDetails = ({ lesson }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
   const { isOpen, toggleOpen } = useChallengeModalStore();
   return (
     <div className="p-5">

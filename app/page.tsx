@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <section className="bg-white text-black">
-        <div className="container">
+        <div className="container sm:px-4">
           <Header />
           <Hero />
           <WhyRockStaddy />
