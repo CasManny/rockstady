@@ -18,6 +18,7 @@ const main = async () => {
     await db.delete(schema.challengeProgress);
     await db.delete(schema.userProgress);
     await db.delete(schema.userSubscription);
+    await db.delete(schema.feedbacks)
 
     await db.insert(schema.books).values([
       {
@@ -28,29 +29,7 @@ const main = async () => {
         description:
           "Learning how to become a master in a particular skill, moving throught phases of apprentice to masters",
       },
-      {
-        id: "2",
-        title: "Unlock it",
-        subTitle: "Bringing out the better version of you",
-        author: "Dan Lok",
-        description:
-          "Exposing the strength behind self moltivation and determination in achieveing success at different level in health, buisiness and relationship",
-      },
-      {
-        id: "3",
-        title: "Hooked",
-        subTitle: "Habit Forming product",
-        author: "Nir Eyal",
-        description: "How to build eye catching product for your users",
-      },
-      {
-        id: "4",
-        title: "Million Dollar Weekend",
-        subTitle: "Bootstrapping a business under one week",
-        author: "Noah Kahan",
-        description:
-          "Getting knowledge on the easiest way to launch a product within a week and make millions of dollar",
-      },
+   
     ]);
 
     await db.insert(schema.chapters).values([
@@ -59,19 +38,8 @@ const main = async () => {
         bookId: "1",
         chapterTitle: "Introduction",
         order: 1,
-      },
-      {
-        id: 2,
-        bookId: "1",
-        chapterTitle: "First Chapter",
-        order: 2
-      },
-      {
-        id: 3,
-        bookId: "1",
-        chapterTitle: "second Chapter",
-        order: 3,
-      },
+      }
+    
     ]);
 
     await db.insert(schema.lessons).values([
@@ -117,6 +85,13 @@ const main = async () => {
         id: 3,
         lessonId: 1, // Assuming this lesson exists
         question: "What are data types?",
+        type: "SELECT",
+        order: 3,
+      },
+      {
+        id: 4,
+        lessonId: 1, // Assuming this lesson exists
+        question: "who is cas?",
         type: "SELECT",
         order: 3,
       },
@@ -175,8 +150,34 @@ const main = async () => {
         order: 4
       },
     ]);
+    await db.insert(schema.challengesOptions).values([
+      {
+        challengeId: 4,
+        isCorrect: false,
+        textOption: "mumu",
+        order: 1,
+      },
+      {
+        challengeId: 4,
+        isCorrect: true,
+        textOption: "developer",
+        order: 2
+      },
+      {
+        challengeId: 4,
+        isCorrect: false,
+        textOption: "pig",
+        order: 3,
+      },
+      {
+        challengeId: 4,
+        isCorrect: false,
+        textOption: "elephant",
+        order: 4
+      },
+    ]);
 
-    console.log("Seeding process elnded...");
+    console.log("Seeding process ended...");
   } catch (error) {
     console.log(error);
   }

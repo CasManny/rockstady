@@ -8,7 +8,7 @@ import SelectChallenge from "./SelectChallenge";
 import TypeChallenge from "./TypeChallenge";
 import QuizFooter from "./QuizFooter";
 import { useHeartModalStore } from "@/store/heart-modal";
-import { useAudio, useWindowSize } from "react-use";
+import { useAudio, useMount, useWindowSize } from "react-use";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import ResultCard from "./ResultCard";
@@ -16,6 +16,7 @@ import {
   reduceHearts,
   upsertChallengeProgress,
 } from "@/actions/challenge-progress";
+import { usePracticeModal } from "@/store/use-practice-modal";
 
 type Props = {
   initialPercentage: number;
@@ -42,6 +43,7 @@ const BookQuiz = ({
   const [pending, startTransition] = useTransition();
   const { width, height } = useWindowSize();
   const { openHeartModal } = useHeartModalStore();
+  const { open: openPracticeModal } = usePracticeModal()
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });
   const [incorrectAudion, _i, inCorrectControls] = useAudio({
     src: "/incorrect.wav",
@@ -56,7 +58,7 @@ const BookQuiz = ({
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
   });
   const challenge = challenges[activeIndex];
-  const options = challenge.challengeOptions;
+  const options = challenge?.challengeOptions ?? [];
   const [selectedOption, setSelectedOption] = useState<number>();
   const onSelect = (id: number) => {
     if (status !== "none") {
@@ -67,6 +69,14 @@ const BookQuiz = ({
   const onNext = () => {
     setActiveIndex((prev) => prev + 1);
   };
+
+  useMount(() => {
+    if (initialPercentage === 100) {
+      openPracticeModal()
+    }
+  })
+
+ 
 
   const onContinue = () => {
     if (hearts === 0) {
