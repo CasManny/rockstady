@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Gem } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -8,39 +9,43 @@ type Props = {
 const ResultCard = ({ varaint, value }: Props) => {
   const imageSrc = varaint === "hearts" ? "/heart.svg" : "/points.svg";
   return (
+    <div
+      className={cn(
+        "rounded-2xl border-2xl w-full p-1",
+        varaint === "points" && "bg-orange-400 border-orange-400",
+        varaint === "hearts" && "bg-rose-500 border-rose-500"
+      )}
+    >
       <div
         className={cn(
-          "rounded-2xl border-2xl w-full p-1",
-          varaint === "points" && "bg-orange-400 border-orange-400",
-          varaint === "hearts" && "bg-rose-500 border-rose-500"
+          "p-1.5 text-white rouned-t-xl font-bold text-center uppercase text-xs",
+          varaint === "hearts" && "bg-rose-500",
+          varaint === "points" && "bg-orange-400"
         )}
       >
-        <div
-          className={cn(
-            "p-1.5 text-white rouned-t-xl font-bold text-center uppercase text-xs",
-            varaint === "hearts" && "bg-rose-500",
-            varaint === "points" && "bg-orange-400"
-          )}
-        >
-          {varaint === "hearts" ? "Hearts Left " : "Total XP"}
-        </div>
-        <div
-          className={cn(
-            "rounded-2xl items-center bg-white flex justify-center p-6 font-bold text-lg",
-            varaint === "hearts" && "text-rose-500",
-            varaint === "points" && "text-orange-400"
-          )}
-        >
+        {varaint === "hearts" ? "Hearts Left " : "Total Gems"}
+      </div>
+      <div
+        className={cn(
+          "rounded-2xl items-center bg-white flex justify-center p-6 font-bold text-lg",
+          varaint === "hearts" && "text-rose-500",
+          varaint === "points" && "text-orange-400"
+        )}
+      >
+        {varaint === "points" ? (
+          <Gem className="text-rs-yellow w-10 h-10" />
+        ) : (
           <Image
             src={imageSrc}
-            alt={`${varaint}`}
+            alt={'/heart.svg"'}
             height={30}
             width={30}
             className={"mr-1.5"}
           />
-          {value}
-        </div>
+        )}
+        {value}
       </div>
+    </div>
   );
 };
 

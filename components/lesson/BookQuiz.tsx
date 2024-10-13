@@ -17,6 +17,9 @@ import {
   upsertChallengeProgress,
 } from "@/actions/challenge-progress";
 import { usePracticeModal } from "@/store/use-practice-modal";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import GetUserFeedback from "../choose-adventure/GetUserFeedback";
 
 type Props = {
   initialPercentage: number;
@@ -43,7 +46,7 @@ const BookQuiz = ({
   const [pending, startTransition] = useTransition();
   const { width, height } = useWindowSize();
   const { openHeartModal } = useHeartModalStore();
-  const { open: openPracticeModal } = usePracticeModal()
+  const { open: openPracticeModal } = usePracticeModal();
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });
   const [incorrectAudion, _i, inCorrectControls] = useAudio({
     src: "/incorrect.wav",
@@ -71,17 +74,16 @@ const BookQuiz = ({
   };
 
   useMount(() => {
+    console.log(initialPercentage);
     if (initialPercentage === 100) {
-      openPracticeModal()
+      openPracticeModal();
     }
-  })
-
- 
+  });
 
   const onContinue = () => {
     if (hearts === 0) {
-      openHeartModal()
-      return
+      openHeartModal();
+      return;
     }
     if (!selectedOption) {
       return null;
@@ -155,7 +157,7 @@ const BookQuiz = ({
       setStatus("none");
       return;
     }
-    const quote = challenge.quote?.toLowerCase().trim()
+    const quote = challenge.quote?.toLowerCase().trim();
     if (quote === userInput.toLowerCase().trim()) {
       startTransition(() => {
         upsertChallengeProgress(challenge.id)
@@ -227,6 +229,12 @@ const BookQuiz = ({
           <div className="flex items-center gap-x-4 w-full">
             <ResultCard varaint="points" value={challenges.length * 10} />
             <ResultCard varaint="hearts" value={hearts} />
+          </div>
+          <div className="flex gap-4 flex-col sm:flex-row items-center">
+            <Link href={"/start-journey"} className="mx-auto">
+              <Button>Continue Improving</Button>
+            </Link>
+            <GetUserFeedback />
           </div>
         </div>
       </>

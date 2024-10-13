@@ -9,6 +9,7 @@ import HeartModal from "@/components/modals/HeartModal";
 import { Suspense } from "react";
 import AddBookModal from "@/components/modals/AddBookModal";
 import FeedbackModal from "@/components/modals/FeedbackModal";
+import PracticeModal from "@/components/modals/PracticeModal";
 
 
 
@@ -42,6 +43,7 @@ export default function RootLayout({
           <HeartModal />
           <AddBookModal />
           <FeedbackModal />
+          <PracticeModal />
       </body>
     </html>
 
