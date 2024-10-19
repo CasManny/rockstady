@@ -28,7 +28,7 @@ const BookList = ({ books, activeBookId }: Props) => {
     })
   };
   return (
-    <div className="gap-4 pt-6 grid grid-cols-1 min-h-screen sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
+    <div className="gap-4 pt-6 grid grid-cols-1 grid-auto-rows-[300px] sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
       {books.map((book, index) => (
         <BookCard
           key={index}
