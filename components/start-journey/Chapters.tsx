@@ -14,7 +14,7 @@ type Props = {
 const Chapters = ({id, title, description, order, lessons, activeLesson, activeLessonPercentage}: Props) => {
   return (
     <div>
-      <ChapterBanner title={title} />
+      {/* <ChapterBanner title={title} /> */}
       <div className="flex items-center flex-col relative">
         {lessons.map((lesson, index) => {
           const isCurrent = lesson.id === activeLesson?.id;
