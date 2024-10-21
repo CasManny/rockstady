@@ -26,6 +26,7 @@ const LessonPage = async () => {
         initialHearts={userProgress.hearts}
         initialLessonChallenges={lesson.challenges}
         lessonSummary={lesson.summary}
+        lessonTitle={lesson.lessonTitle}
       />
     </div>
   );

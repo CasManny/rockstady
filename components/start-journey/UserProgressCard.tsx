@@ -12,13 +12,13 @@ type Props = {
 const UserProgressCard = ({ hearts, points }: Props) => {
   return (
     <div className="flex items-center justify-center gap-x-2 w-full mt-5">
-      <Link href={"/shop"}>
+      <div>
         <Button variant={"ghost"} className="text-rs-yellow ">
           <Gem className="h-5 w-5 text-rs-yellow mr-2" />
           {points}
         </Button>
-      </Link>
-      <Link href={"/shop"}>
+      </div>
+      <div>
         <Button variant={"ghost"} className="text-rose-500 ">
           <Image
             src={"/heart.svg"}
@@ -29,7 +29,7 @@ const UserProgressCard = ({ hearts, points }: Props) => {
           />
           {hearts}
         </Button>
-      </Link>
+      </div>
     </div>
   );
 };

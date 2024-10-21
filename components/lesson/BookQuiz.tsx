@@ -22,6 +22,7 @@ import Link from "next/link";
 import GetUserFeedback from "../choose-adventure/GetUserFeedback";
 
 type Props = {
+  lessonTitle: string;
   initialPercentage: number;
   initialLessonId: number;
   initialHearts: number;
@@ -38,6 +39,7 @@ const BookQuiz = ({
   initialLessonId,
   initialLessonChallenges,
   lessonSummary,
+  lessonTitle
 }: Props) => {
   const [hearts, setHearts] = useState(initialHearts);
   const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: true });
@@ -74,7 +76,6 @@ const BookQuiz = ({
   };
 
   useMount(() => {
-    console.log(initialPercentage);
     if (initialPercentage === 100) {
       openPracticeModal();
     }
@@ -247,7 +248,7 @@ const BookQuiz = ({
       {incorrectAudion}
       <div className="pb-10 h-full">
         <QuizHeader hearts={hearts} percentage={percentage} />
-        <LessonSummary summary={lessonSummary} />
+        <LessonSummary summary={lessonSummary} lessonTitle={lessonTitle} />
         {challenge.type === "SELECT" && (
           <>
             <SelectChallenge
