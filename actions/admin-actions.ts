@@ -149,3 +149,18 @@ export const createFeedback = async (values: IFeedback) => {
     })
     
 }
+
+export const uploadCoverImage = async (imageUrl: string, bookId: string) => {
+    const book = await db.query.books.findFirst({
+        where: eq(books.id, bookId)
+    })
+    if (!book) {
+        return { error: "not-found"}
+    }
+
+    await db.update(books).set({
+        imageUrl: imageUrl
+    }).where(eq(books.id, bookId))
+
+    revalidatePath(`/admin/books/${bookId}`)
+}

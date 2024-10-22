@@ -28,7 +28,7 @@ const BookDetails = ({ book }: Props) => {
       <div className="flex flex-col md:flex-row gap-2 mt-5">
         <div className="">
           <Image
-            src="/mastery.jpg"
+            src={book?.imageUrl! || '/mastery.jpg'}
             alt={book?.title!}
             width={500}
             height={500}

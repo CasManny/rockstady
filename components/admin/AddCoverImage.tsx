@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
+import { uploadCoverImage } from "@/actions/admin-actions";
 
 const formSchema = z.object({
   image: z.string().min(10, "link to image must be provided"),
@@ -35,7 +36,9 @@ const AddCoverImage = ({ coverImage, bookId }: Props) => {
   });
   const { isValid, isSubmitting } = form.formState;
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {}
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await uploadCoverImage(values.image, bookId)
+  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-5">
