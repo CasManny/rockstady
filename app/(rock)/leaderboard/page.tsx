@@ -44,9 +44,11 @@ const LeaderBoard = async () => {
             </p>
             <Separator className="mb-4 h-0.5 rounded-full" />
             <div className="flex items-center justify-center flex-col">
-              <h1 className="text-2xl font-bold mb-4 text-center">Be the first to reach the top of the leaderboard!</h1>
+              <h1 className="text-2xl font-bold mb-4 text-center">
+                Be the first to reach the top of the leaderboard!
+              </h1>
               <Button asChild>
-                <Link href={'/choose-an-adventure'}>Start Now</Link>
+                <Link href={"/choose-an-adventure"}>Start Now</Link>
               </Button>
             </div>
           </div>
