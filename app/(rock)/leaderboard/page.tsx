@@ -36,15 +36,15 @@ const LeaderBoard = async () => {
               height={90}
               width={90}
             />
-            <h1 className="tex-center font-bold text-neutral-800 text-2xl my-6">
+            <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
               Leaderboard
             </h1>
-            <p className="text-muted-foreground text-center text-lg mb-6">
+            <p className="text-muted-foreground text-center text-sm sm:text-lg mb-6">
               See where you stand among other learners in the community
             </p>
             <Separator className="mb-4 h-0.5 rounded-full" />
             <div className="flex items-center justify-center flex-col">
-              <h1 className="text-2xl font-bold mb-4">Be the first to reach the top of the leaderboard!</h1>
+              <h1 className="text-2xl font-bold mb-4 text-center">Be the first to reach the top of the leaderboard!</h1>
               <Button asChild>
                 <Link href={'/choose-an-adventure'}>Start Now</Link>
               </Button>
@@ -56,7 +56,7 @@ const LeaderBoard = async () => {
   }
 
   return (
-    <div className="flex flex-row-reverse gap-[48px] px-6">
+    <div className="flex flex-row-reverse gap-[48px] px-2 sm:px-6">
       <StickyWrapper>
         <UserProgressCard
           hearts={userProgress?.hearts}
@@ -71,10 +71,10 @@ const LeaderBoard = async () => {
             height={90}
             width={90}
           />
-          <h1 className="tex-center font-bold text-neutral-800 text-2xl my-6">
+          <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
             Leaderboard
           </h1>
-          <p className="text-muted-foreground text-center text-lg mb-6">
+          <p className="text-center text-sm sm:text-lg mb-6">
             See where you stand among other learners in the community
           </p>
           <Separator className="mb-4 h-0.5 rounded-full" />
