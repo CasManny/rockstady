@@ -1,6 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Gem } from "lucide-react";
 
 interface LeaderboardCardProps {
@@ -20,14 +19,15 @@ const LeaderboardCard = ({
   return (
     <div className="flex items-center w-full p-2 px-4 rounded-xl hover:bg-gray-200/50">
       <p className="font-bold text-lime-700 mr-4">{positon + 1}</p>
-      <Avatar className="border bg-green-500 h-12 w-12 mr-2">
-        {/* <AvatarImage src={image!} className="object-cover" /> */}
-        <AvatarFallback>{avatarFallback}</AvatarFallback>
-      </Avatar>
+      <div className="border bg-green-500 h-12 w-12 mr-2 rounded-full flex items-center justify-center">
+        <p className="text-white">{avatarFallback}</p>
+      </div>
       <p className="font-bold text-neutral-800 flex-1 truncate">{name}</p>
       <div className="flex items-center gap-1">
         <Gem className="w-5 h-5 sm:w-10 sm:h-10 text-rs-yellow" />
-        <p className="text-muted-foreground text-xs sm:text-lg">{gemNumber} Gem</p>
+        <p className="text-muted-foreground text-xs sm:text-lg">
+          {gemNumber} Gem
+        </p>
       </div>
     </div>
   );

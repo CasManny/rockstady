@@ -4,19 +4,15 @@ import Image from "next/image";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
 type Props = {
-  title: string;
   id: string;
   imageSrc?: string;
   onClick: (id: string) => void;
   disabled?: boolean;
   active?: boolean;
-  author: string;
 };
 const BookCard = ({
-  title,
   id,
   imageSrc,
-  author,
   active,
   disabled,
   onClick,
@@ -25,7 +21,7 @@ const BookCard = ({
     <div
       onClick={() => onClick(id)}
       className={cn(
-        "h-60 w-60  relative rounded-xl cursor-pointer flex flex-col items-center justify-between",
+        "w-full h-full  relative rounded-xl cursor-pointer flex flex-col items-center justify-between",
         disabled && "pointer-events-none opacity-50"
       )}
     >
@@ -41,14 +37,10 @@ const BookCard = ({
         )}
       </div>
       {imageSrc && (
-        <Avatar className="rounded-sm w-[80%] h-[80%] sm:w-full sm:h-full">
-          <AvatarImage src={imageSrc} className="w-full h-full" />
+        <Avatar className="rounded-sm w-full h-full">
+          <AvatarImage src={imageSrc} />
        </Avatar>
       )}
-      <p className="text-neutral-700 text-center font-bold mt-3">{title}</p>
-      <p className="text-center">
-        Author: <span>{author}</span>
-      </p>
     </div>
   );
 };

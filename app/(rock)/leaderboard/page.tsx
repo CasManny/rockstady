@@ -58,7 +58,7 @@ const LeaderBoard = async () => {
   }
 
   return (
-    <div className="flex flex-row-reverse gap-[48px] px-2 sm:px-6">
+    <div className="flex flex-row-reverse gap-[48px] px-2 sm:px-6 h-full">
       <StickyWrapper>
         <UserProgressCard
           hearts={userProgress?.hearts}
@@ -66,20 +66,24 @@ const LeaderBoard = async () => {
         />
       </StickyWrapper>
       <FeedWrapper>
-        <div className="w-full flex flex-col items-center">
-          <Image
-            src={"/leaderboard.svg"}
-            alt="leaderboard"
-            height={90}
-            width={90}
-          />
-          <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
-            Leaderboard
-          </h1>
-          <p className="text-center text-sm sm:text-lg mb-6">
-            See where you stand among other learners in the community
-          </p>
-          <Separator className="mb-4 h-0.5 rounded-full" />
+        <div className="w-full h-full flex flex-col items-center">
+          <div className="sticky top-0 bg-white shadow-sm w-full z-50">
+            <Image
+              src={"/leaderboard.svg"}
+              alt="leaderboard"
+              height={90}
+              width={90}
+              className="mx-auto"
+            />
+            <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
+              Leaderboard
+            </h1>
+            <p className="text-center text-sm sm:text-lg mb-6">
+              See where you stand among other learners in the community
+            </p>
+
+            <Separator className="mb-4 h-0.5 rounded-full" />
+          </div>
           {leaderboard.map((user, index: number) => (
             <LeaderboardCard
               key={index}

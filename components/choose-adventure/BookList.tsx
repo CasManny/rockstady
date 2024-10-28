@@ -30,15 +30,13 @@ const BookList = ({ books, activeBookId }: Props) => {
     });
   };
   return (
-    <div className="gap-4 flex flex-wrap justify-center items-center flex-col sm:flex-row">
+    <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
       {books.map((book, index) => (
         <BookCard
           key={index}
           id={book.id}
           disabled={pending}
-          title={book.title}
           imageSrc={book.imageUrl!}
-          author={book.author}
           active={book.id === activeBookId}
           onClick={onClick}
         />

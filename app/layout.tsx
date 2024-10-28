@@ -34,7 +34,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body
-        className={`${poppins.className} antialiased`}
+        className={`${poppins.className} antialiased h-full bg-white`}
         >
 
           {children}
