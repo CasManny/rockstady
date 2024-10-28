@@ -35,6 +35,11 @@ const sidebarLinks = [
     href: "/upgrade",
     iconSrc: "/shop.svg",
   },
+  {
+    label: "Community",
+    href: "/community",
+    iconSrc: "/community1.svg"
+  }
 ];
 const Sidebar = async ({ className }: Props) => {
   const user = await currentUser()

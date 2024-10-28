@@ -20,15 +20,17 @@ const BookList = ({ books, activeBookId }: Props) => {
       return router.push(`/start-journey/${bookId}`);
     }
     startTransition(() => {
-      upsertUserProgress(bookId).then((response) => {
-        if (response?.error === 'empty') {
-          return toast.error("Book is empty ")
-        }
-      }).catch(() => toast.error("something went wrong!"))
-    })
+      upsertUserProgress(bookId)
+        .then((response) => {
+          if (response?.error === "empty") {
+            return toast.error("Book is empty ");
+          }
+        })
+        .catch(() => toast.error("something went wrong!"));
+    });
   };
   return (
-    <div className="gap-4 pt-6 grid grid-cols-1 grid-auto-rows-[300px] sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
+    <div className="gap-4 flex flex-wrap justify-center items-center flex-col sm:flex-row">
       {books.map((book, index) => (
         <BookCard
           key={index}

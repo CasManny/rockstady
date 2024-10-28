@@ -19,8 +19,8 @@ const userDashboard = async () => {
     )
   }
   return (
-    <div className="h-full max-w-[912px] px-3 pt-3 mx-auto">
-      <h1 className="text-2xl font-bold text-neutral-700">Choose a Book to start your Journey</h1>
+    <div className="h-full w-full px-3 pt-3 mx-auto">
+      <h1 className="text-lg text-center md:text-4xl font-bold text-neutral-700">Choose a Book to start your Journey</h1>
       <BookList books={books} activeBookId={activeBook?.activeBookId} />
       <GetUserFeedback position />
   </div>
