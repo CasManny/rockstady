@@ -13,6 +13,8 @@ const ShopPage = async () => {
     redirect('/choose-an-adventure')
   }
 
+  console.log(userProgress)
+
   return (
     <div className="flex flex-row-reverse">
        <StickyWrapper>

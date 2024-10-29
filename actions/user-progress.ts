@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const upsertUserProgress = async (bookId: string) => {
-  const { userId } = auth();
+  const { userId } = await auth();
   const user = await currentUser();
 
   if (!userId || !user) {
@@ -23,7 +23,7 @@ export const upsertUserProgress = async (bookId: string) => {
   const activeBook = await getUserProgress();
   if (!activeBook) {
     await db.insert(userProgress).values({
-      userId: userId,
+      userId: user.id,
       userImage: user.imageUrl,
       userName: user.username || user.firstName,
       activeBookId: bookId,
@@ -33,7 +33,7 @@ export const upsertUserProgress = async (bookId: string) => {
     redirect(`/start-journey/${bookId}`);
   } else {
     await db.update(userProgress).set({
-      userId: userId,
+      userId: user.id,
       activeBookId: bookId,
       userImage: user.imageUrl,
     });

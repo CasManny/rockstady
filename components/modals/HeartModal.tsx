@@ -19,8 +19,8 @@ const HeartModal = () => {
   const [isClient, setIsClient] = useState(false);
 
   const onClick = () => {
-    close();
-    router.push("/store");
+    closeHeartModal()
+    router.push("/upgrade");
   };
 
   useEffect(() => {

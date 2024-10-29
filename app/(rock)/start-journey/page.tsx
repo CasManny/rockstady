@@ -28,8 +28,8 @@ const StartJourney = async () => {
     <div className="flex flex-row-reverse">
       <StickyWrapper>
         <UserProgressCard
-          hearts={userProgress.hearts}
-          points={userProgress.points}
+          hearts={userProgress?.hearts}
+          points={userProgress?.points}
         />
       </StickyWrapper>
       <FeedWrapper>
@@ -51,6 +51,7 @@ const StartJourney = async () => {
         ))}
       </FeedWrapper>
     </div>
+    
   );
 };
 

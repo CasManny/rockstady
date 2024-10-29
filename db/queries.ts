@@ -1,8 +1,8 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 import db from "./drizzle";
-import { desc, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import {
   books,
   challengeProgress,
@@ -13,7 +13,7 @@ import {
 } from "./schema";
 
 export const getBooks = cache(async () => {
-  const { userId } = auth();
+  const { userId } = auth()
   if (!userId) {
     redirect("/sign-in");
   }
@@ -22,7 +22,7 @@ export const getBooks = cache(async () => {
 });
 
 export const getActiveUserProgress = cache(async () => {
-  const { userId } = auth();
+  const {userId } = auth()
   if (!userId) {
     redirect("/sign-in");
   }
@@ -37,9 +37,9 @@ export const getActiveUserProgress = cache(async () => {
 });
 
 export const getBookById = cache(async (bookId: string) => {
-  const { userId } = auth();
+  const userId = auth()
   if (!userId) {
-    return null;
+    redirect('/sign-in')
   }
   const book = await db.query.books.findFirst({
     where: eq(books.id, bookId),
@@ -59,7 +59,8 @@ export const getBookById = cache(async (bookId: string) => {
 });
 
 export const getUserProgress = cache(async () => {
-  const { userId } = auth();
+  const { userId } =  auth()
+  
   if (!userId) {
     redirect("/start-journey");
   }
@@ -75,7 +76,7 @@ export const getUserProgress = cache(async () => {
 });
 
 export const getActiveBookLessons = cache(async () => {
-  const { userId } = auth();
+  const { userId } = auth()
   if (!userId) {
     redirect("/sign-in");
   }
@@ -134,7 +135,7 @@ export const getActiveBookLessons = cache(async () => {
 });
 
 export const getBookProgress = cache(async () => {
-  const { userId } = auth();
+  const { userId } = auth()
   if (!userId) {
     redirect("/sign-in");
   }
@@ -186,9 +187,9 @@ export const getBookProgress = cache(async () => {
 });
 
 export const getLesson = cache(async (id?: number) => {
-  const { userId } = auth();
+  const { userId } = auth()
   if (!userId) {
-    return null;
+    redirect('/sign-in')
   }
   const bookProgress = await getBookProgress();
   const lessonId = id || bookProgress?.activeLessonId;
@@ -225,6 +226,7 @@ export const getLesson = cache(async (id?: number) => {
 
   return { ...data, challenges: normalizedChallenges };
 });
+
 export const getLessonPercentage = cache(async () => {
   const bookProgress = await getBookProgress();
   if (!bookProgress?.activeLessonId) {
@@ -255,6 +257,6 @@ export const getLeaderboardData = cache(async () => {
   })
 
   return leaderboard
-})
+});
 
 

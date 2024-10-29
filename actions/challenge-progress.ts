@@ -111,13 +111,11 @@ export const reduceHearts = async (challengeId: number) => {
 }
 
 export const refillHeart = async () => {
- 
-
   const userProgressInfo = await getUserProgress()
 
   if (!userProgressInfo) return 
   
-  if (userProgressInfo.points > POINT_TO_REFILL) {
+  if (userProgressInfo.points > POINT_TO_REFILL && userProgressInfo.hearts < 5) {
     await db.update(userProgress).set({
       points: userProgressInfo.points - POINT_TO_REFILL,
       hearts: 5

@@ -15,7 +15,7 @@ const UserProgressCard = ({ hearts, points }: Props) => {
       <div>
         <Button variant={"ghost"} className="text-rs-yellow ">
           <Gem className="h-5 w-5 text-rs-yellow mr-2" />
-          {points}
+          {!!points ? points : 0}
         </Button>
       </div>
       <div>
@@ -27,7 +27,7 @@ const UserProgressCard = ({ hearts, points }: Props) => {
             alt="points"
             className="mr-2"
           />
-          {hearts}
+          {!!hearts ? hearts : 0}
         </Button>
       </div>
     </div>
