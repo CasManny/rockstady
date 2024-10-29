@@ -26,9 +26,7 @@ const BookCollections = ({ books }: Props) => {
         {books.map((book, index) => (
           <BookCard
             id={book.id}
-            title={book.title}
             imageUrl={book.imageUrl}
-            author={book.author}
           />
         ))}
       </div>

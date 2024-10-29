@@ -10,6 +10,7 @@ import {
   RocketIcon,
   Shuffle,
 } from "lucide-react";
+import Link from "next/link";
 
 const categories = [
   {
@@ -56,10 +57,10 @@ const BooksCategory = () => {
       </h1>
       <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {categories.map((category, index) => (
-          <div key={index} className="border flex justify-center p-[20px] items-center hover:border-rs-yellow rounded-md">
+          <Link href={'/choose-an-adventure'}  key={index} className="border flex justify-center p-[20px] items-center hover:border-rs-yellow rounded-md">
             <category.icon className="mr-2" />
             <h3 className="font-bold">{category.genre}</h3>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
