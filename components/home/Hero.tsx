@@ -9,12 +9,12 @@ const Hero = () => {
     <div className="container mt-10 min-h-[80vh] p-5 w-full animate__animated animate__zoomInDown">
       <div className="">
         <AnimateLogo />
-        <h1 className="lg:text-4xl text-2xl font-semibold mb-4 dark:text-white">
-          Read, score, and keep rocking!
+        <h2 className="lg:text-2xl mb-2 font-semibold dark:text-white">Learn faster. Get smarter.</h2>
+        <h1 className="lg:text-6xl text-2xl font-bold mb-4 dark:text-white">
+          Way more than <br /> book summaries
         </h1>
         <p className="dark:text-rs-text-dark">
-          Turn reading into a game. Earn points, climb the leaderboard, and{" "}
-          <br /> stay ahead in your career and life.
+        Learn key points and gain insights you won't find anywhere else. <br /> Understand the world’s best ideas.
         </p>
       </div>
       {userId ? (
