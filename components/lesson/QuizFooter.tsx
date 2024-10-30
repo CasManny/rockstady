@@ -16,7 +16,7 @@ const QuizFooter = ({ status, disabled, lessonId, onCheck }: Props) => {
   return (
     <footer
     className={cn(
-      "lg:h-[50px] h-full mt-4",
+      "lg:h-[50px] my-5 p-5 sm:p-10",
       status === "correct" && "border-transparent bg-green-100",
       status === "wrong" && "border-transparent bg-rose-100"
     )}

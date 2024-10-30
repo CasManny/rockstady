@@ -27,7 +27,7 @@ const Sidebar = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <Menu className="h-8 w-8 lg:hidden" />
+        <Menu className="h-8 w-8 lg:hidden dark:text-white" />
       </SheetTrigger>
       <SheetContent side={"top"} className="bg-white h-full text-black">
         <div>

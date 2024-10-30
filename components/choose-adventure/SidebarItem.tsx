@@ -20,7 +20,7 @@ const SidebarItem = ({ label, iconSrc, href }: Props) => {
       className={cn(`justify-start h-[52px] hover:bg-rs-yellow/70`, active && 'bg-rs-yellow/70 text-white')}
       asChild
     >
-      <Link href={href}>
+      <Link href={href} className="dark:text-white">
         <Image
           src={iconSrc}
           alt={label}

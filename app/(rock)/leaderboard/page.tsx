@@ -67,7 +67,7 @@ const LeaderBoard = async () => {
       </StickyWrapper>
       <FeedWrapper>
         <div className="w-full h-full flex flex-col items-center">
-          <div className="sticky top-0 bg-white shadow-sm w-full z-50">
+          <div className="sticky top-0 bg-white dark:bg-rs-bg-dark shadow-sm w-full z-50">
             <Image
               src={"/leaderboard.svg"}
               alt="leaderboard"
@@ -75,10 +75,10 @@ const LeaderBoard = async () => {
               width={90}
               className="mx-auto"
             />
-            <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
+            <h1 className="text-center font-bold text-neutral-800 text-2xl my-6 dark:text-white">
               Leaderboard
             </h1>
-            <p className="text-center text-sm sm:text-lg mb-6">
+            <p className="text-center text-sm sm:text-lg mb-6 dark:text-rs-text-dark">
               See where you stand among other learners in the community
             </p>
 

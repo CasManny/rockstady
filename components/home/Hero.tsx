@@ -9,10 +9,10 @@ const Hero = () => {
     <div className="container mt-10 min-h-[80vh] p-5 w-full animate__animated animate__zoomInDown">
       <div className="">
         <AnimateLogo />
-        <h1 className="lg:text-4xl text-2xl font-semibold mb-4">
+        <h1 className="lg:text-4xl text-2xl font-semibold mb-4 dark:text-white">
           Read, score, and keep rocking!
         </h1>
-        <p>
+        <p className="dark:text-rs-text-dark">
           Turn reading into a game. Earn points, climb the leaderboard, and{" "}
           <br /> stay ahead in your career and life.
         </p>

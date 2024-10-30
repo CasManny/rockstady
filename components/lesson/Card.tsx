@@ -44,14 +44,14 @@ const Card = ({
   return (
     <div
       className={cn(
-        "h-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer active:border-b-2",
-        selected && "border-sky-300 bg-sky-100 hover:bg-sky-100",
+        "h-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer active:border-b-2 dark:bg-white/40",
+        selected && "border-sky-300 bg-sky-100 hover:bg-sky-100 dark:bg-white/90",
         selected &&
           status === "correct" &&
-          "border-green-300 bg-green-100 hover:bg-green-100",
+          "border-green-300 bg-green-100 hover:bg-green-100 dark:bg-green-500 dark:text-white",
         selected &&
           status === "wrong" &&
-          "border-rose-300 hover:bg-rose-100 bg-rose-100",
+          "border-rose-300 hover:bg-rose-100 bg-rose-100 dark:bg-rose-100",
         disabled && "pointer-events-none hover:bg-white",
         type === "TYPEIT" && "lg:p-3 w-full"
       )}
@@ -74,13 +74,13 @@ const Card = ({
           className={cn(
             "text-neutral-600 text-sm lg:text-base",
             selected && "text-sky-500",
-            selected && status === "correct" && "text-green-500",
+            selected && status === "correct" && "text-green-500 dark:text-white",
             selected && status === "wrong" && "text-rose-500"
           )}
         >
           {text}
         </p>
-        <div
+        {/* <div
           className={cn(
             "lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 lg:text-[15px] text-xs",
             selected && "border-sky-300 text-sky-500",
@@ -91,7 +91,7 @@ const Card = ({
           )}
         >
           {shortcut}
-        </div>
+        </div> */}
       </div>
     </div>
   );

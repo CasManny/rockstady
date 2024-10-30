@@ -8,7 +8,7 @@ import "animate.css";
 export default function Home() {
   return (
     <>
-      <section className="bg-white text-black">
+      <section className="">
         <div className="container sm:px-4">
           <Header />
           <Hero />

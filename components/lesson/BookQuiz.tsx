@@ -198,7 +198,7 @@ const BookQuiz = ({
     }
   };
 
-  if (!challenge) {
+  if (true || !challenge) {
     return (
       <>
         {finishAudio}
@@ -209,7 +209,7 @@ const BookQuiz = ({
           width={width}
           height={height}
         />
-        <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
+        <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center  h-full">
           <Image
             src={"/finish.svg"}
             alt="finish"
@@ -246,7 +246,7 @@ const BookQuiz = ({
     <>
       {correctAudio}
       {incorrectAudion}
-      <div className="pb-10 h-full">
+      <div className="pb-10 h-full dark:bg-rs-bg-dark relative">
         <QuizHeader hearts={hearts} percentage={percentage} />
         <LessonSummary summary={lessonSummary} lessonTitle={lessonTitle} />
         {challenge.type === "SELECT" && (
@@ -255,6 +255,7 @@ const BookQuiz = ({
               question={challenge.question}
               options={options}
               onSelect={onSelect}
+              status={status}
               selectedOption={selectedOption}
               type={challenge.type}
             />

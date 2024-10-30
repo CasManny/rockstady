@@ -32,10 +32,10 @@ const Questspage = async () => {
             height={90}
             width={90}
           />
-          <h1 className="tex-center font-bold text-neutral-800 text-2xl my-6">
+          <h1 className="tex-center font-bold text-neutral-800 text-2xl my-6 dark:text-white">
             Quests
           </h1>
-          <p className="text-muted-foreground text-center text-lg mb-6">
+          <p className="text-muted-foreground text-center text-lg mb-6 dark:text-rs-text-dark">
             Complete Quests by earning Gems
           </p>
           <ul className="w-full ">
@@ -45,7 +45,7 @@ const Questspage = async () => {
                 <div className="flex items-center w-full p-4 gap-x-4" key={quest.title}>
                   <Gem className='h-10 w-10 text-rs-yellow' />
                   <div className="flex flex-col gap-y-2 w-full">
-                    <p className="text-neutral-700 font-bold text-xl ">{quest.title}</p>
+                    <p className="text-neutral-700 font-bold text-xl  dark:text-white/90">{quest.title}</p>
                     <Progress value={progress} className="h-3" />
                   </div>
                 </div>

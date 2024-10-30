@@ -10,11 +10,13 @@ const config: Config = {
 	theme: {
     	extend: {
     		container: {
-    			center: 'true'
+    			center: true
     		},
     		colors: {
     			background: 'hsl(var(--background))',
-    			'rs-yellow': '#F3BE00',
+				'rs-yellow': '#F3BE00',
+				"rs-bg-dark": "#0C0D17",
+				"rs-text-dark": "#D0DFFF",
     			foreground: 'hsl(var(--foreground))',
     			card: {
     				DEFAULT: 'hsl(var(--card))',

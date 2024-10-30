@@ -19,7 +19,7 @@ const LessonPage = async () => {
       lesson.challenges.length) *
     100;
   return (
-    <div className="pb-10">
+    <div className="pb-10 h-full">
       <BookQuiz
         initialLessonId={lesson.id}
         initialPercentage={initialPercentage}

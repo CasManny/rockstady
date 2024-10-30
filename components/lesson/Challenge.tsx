@@ -7,14 +7,16 @@ type Props = {
   type: (typeof challenges.$inferSelect)["type"];
   onSelect: (id: number) => void;
   selectedOption?: number;
+  status: "correct" | "wrong" | "none";
 };
-const Challenge = ({ options, type, onSelect, selectedOption }: Props) => {
+const Challenge = ({ options, type, onSelect, selectedOption, status }: Props) => {
   return (
     <div className={cn("grid gap-2 grid-cols-1")}>
       {options.map((option, index) => (
         <Card
           key={index}
           id={option.id}
+          status={status}
           shortcut={`${index + 1}`}
           text={option?.textOption}
           selected={selectedOption === option.id}
