@@ -36,15 +36,15 @@ const LeaderBoard = async () => {
               height={90}
               width={90}
             />
-            <h1 className="text-center font-bold text-neutral-800 text-2xl my-6">
+            <h1 className="text-center font-bold text-neutral-800 text-2xl my-6 dark:text-white">
               Leaderboard
             </h1>
-            <p className="text-muted-foreground text-center text-sm sm:text-lg mb-6">
+            <p className="text-muted-foreground text-center text-sm sm:text-lg mb-6 dark:text-rs-text-dark">
               See where you stand among other learners in the community
             </p>
             <Separator className="mb-4 h-0.5 rounded-full" />
             <div className="flex items-center justify-center flex-col">
-              <h1 className="text-2xl font-bold mb-4 text-center">
+              <h1 className="text-2xl font-bold mb-4 text-center dark:text-white">
                 Be the first to reach the top of the leaderboard!
               </h1>
               <Button asChild>

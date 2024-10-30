@@ -198,7 +198,7 @@ const BookQuiz = ({
     }
   };
 
-  if (true || !challenge) {
+  if (!challenge) {
     return (
       <>
         {finishAudio}
