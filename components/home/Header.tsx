@@ -24,7 +24,9 @@ const Header = () => {
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-1">
             <Mountain className="h-10 w-10 text-[#F3BE00]" />
-            <h1 className="font-semibold text-lg sm:text-2xl dark:text-white">Rockstaddy</h1>
+            <h1 className="font-semibold text-lg sm:text-2xl dark:text-white">
+              Rockstaddy
+            </h1>
           </div>
           <div className="items-center gap-5 hidden lg:flex dark:text-rs-text-dark">
             {headerLinks.map((link, index) => (
@@ -48,7 +50,9 @@ const Header = () => {
                 Improve Today
               </Button>
             </Link>
-            <ModeToggle />
+            <div className="hidden lg:flex">
+              <ModeToggle />
+            </div>
           </div>
         ) : (
           <div className="gap-2 ml-auto hidden lg:flex">
@@ -69,8 +73,8 @@ const Header = () => {
           </div>
         )}
         <div className="flex items-center gap-2">
-        <Sidebar />
-        <ModeToggle display />
+          <Sidebar />
+          <ModeToggle display />
         </div>
       </div>
     </header>
