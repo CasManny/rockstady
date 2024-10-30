@@ -23,9 +23,9 @@ export const upsertUserProgress = async (bookId: string) => {
   const activeBook = await getUserProgress();
   if (!activeBook) {
     await db.insert(userProgress).values({
-      userId: user.id,
-      userImage: user.imageUrl,
-      userName: user.username || user.firstName,
+      userId:userId,
+      userImage: user ? user.imageUrl : "",
+      userName: user ? user.username : "",
       activeBookId: bookId,
     });
 
@@ -33,9 +33,9 @@ export const upsertUserProgress = async (bookId: string) => {
     redirect(`/start-journey/${bookId}`);
   } else {
     await db.update(userProgress).set({
-      userId: user.id,
+      userId: user ? user.id : userId,
       activeBookId: bookId,
-      userImage: user.imageUrl,
+      userImage: user ? user.imageUrl: "",
     });
 
     revalidatePath("/choose-an-adventure");
