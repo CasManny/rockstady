@@ -11,6 +11,7 @@ import AddBookModal from "@/components/modals/AddBookModal";
 import FeedbackModal from "@/components/modals/FeedbackModal";
 import PracticeModal from "@/components/modals/PracticeModal";
 import { ThemeProvider } from "@/providers/theme-provide";
+import { ConvexClientProvider } from "../providers/convex-client-provider";
 
 const poppins = Poppins({
   weight: ["300", "400", "600"],
@@ -32,7 +33,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${poppins.className} antialiased h-full dark:bg-rs-bg-dark`}>
+        <body
+          className={`${poppins.className} antialiased h-full dark:bg-rs-bg-dark`}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -40,7 +43,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <>
-              {children}
+              <ConvexClientProvider>{children}</ConvexClientProvider>
               <ToastProvider />
               <ExitModal />
               <HeartModal />
