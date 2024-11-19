@@ -14,8 +14,7 @@ interface CallListProps {
 }
 
 const CallList = ({ type }: CallListProps) => {
-  const { isLoading, endedCalls, upcomingCalls, callRecordings } =
-    useGetCalls();
+  const { isLoading, endedCalls, upcomingCalls, callRecordings } = useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
     const router = useRouter();
     const { toast } = useToast()
