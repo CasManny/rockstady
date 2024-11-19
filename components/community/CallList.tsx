@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import MeetingCard from "./MeetingCard";
 import { Call } from "@stream-io/video-react-sdk";
 import Loader from "./Loader";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 interface CallListProps {
   type: "ended" | "upcoming" | "recordings";
@@ -17,7 +17,8 @@ const CallList = ({ type }: CallListProps) => {
   const { isLoading, endedCalls, upcomingCalls, callRecordings } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
-  const router = useRouter();
+    const router = useRouter();
+    const { toast } = useToast()
 
   const getCalls = () => {
     switch (type) {
