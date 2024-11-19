@@ -1,56 +1,41 @@
-"use client";
-import { useGetUserCommunities } from "@/features/community/api/use-get-communities";
-import { useGetCommunityByName } from "@/features/community/api/use-get-community";
-import { useUser } from "@clerk/nextjs";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import RockstaddyLogo from "./rockstaddy-logo";
+"use client"
 
-const CommunityLink = ({ label, href }: { label?: string; href?: string }) => (
-  <Link
-    href={href || ""}
-    className="flex justify-between items-center mt-5 hover:bg-rs-yellow hover:text-white bg-rs-yellow/20 p-5 rounded-md"
-  >
-    <span>{label}</span>
-    <ArrowRight />
-  </Link>
-);
-const Community = () => {
-  const name = "Rockstaddy - Live community";
-  const { user } = useUser();
-  if (!user) {
-    return;
-  }
+import MeetingTypeList from "@/components/community/MeetingTypeList";
+import { useEffect, useState } from "react";
 
-  const { data: rockstaddy, isLoading: isLoadingRockstaddy } =
-    useGetCommunityByName({ communityName: name });
-  const { data: otherCommunity, isLoading: isLoadingOtherCommunity } =
-    useGetUserCommunities({ userId: user.id });
+const CommunityHomepage = () => {
+  const [time, setTime] = useState(() =>
+    new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+  );
+  const [date, setDate] = useState(() =>
+    new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date())
+  );
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
+      setDate(new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(now));
+    }, 1000);
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
   return (
-    <div className="h-full w-full relative">
-      <RockstaddyLogo />
-      <div className="max-w-3xl mx-auto sm:p-20 p-10 relative z-10 h-full">
-        <div className="">
-          <h1 className="font-bold text-rs-bg-dark">Your community</h1>
-          <CommunityLink
-            href={`/community/${rockstaddy?.[0]._id}`}
-            label={rockstaddy?.[0].name}
-          />
-          {otherCommunity?.length! > 0 && (
-            <>
-              {otherCommunity?.map((community) => (
-                <CommunityLink
-                  href={`/community/${community?._id}`}
-                  label={community?.name}
-                />
-              ))}
-            </>
-          )}
+    <section className="flex size-full flex-col gap-10 text-neutral-700">
+    <div className="h-[300px] w-full rounded-[20px] bg-hero bg-cover">
+      <div className="flex h-full flex-col justify-between max-md:px-5 max-md:py-8 lg:p-11">
+        <h2 className="bg-slate-200 max-w-[270px] rounded py-2 text-center text-base font-normal">
+          Upcoming Meeting at 12:30 PM
+        </h2>
+        <div className="flex flex-col gap-2">
+          <h1 className="font-extrabold text-4xl lg:text-7xl">{time}</h1>
+          <p className="text-lg font-medium text-black lg:text-2xl">{date}</p>
         </div>
       </div>
-    </div>
-  );
-};
+      </div>
+      <MeetingTypeList />
+  </section>
+  )
+}
 
-export default Community;
+export default CommunityHomepage

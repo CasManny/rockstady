@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster"
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import ToastProvider from "@/providers/ToastProvider";
@@ -12,6 +13,8 @@ import FeedbackModal from "@/components/modals/FeedbackModal";
 import PracticeModal from "@/components/modals/PracticeModal";
 import { ThemeProvider } from "@/providers/theme-provide";
 import { ConvexClientProvider } from "../providers/convex-client-provider";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
+import 'react-datepicker/dist/react-datepicker.css'
 
 const poppins = Poppins({
   weight: ["300", "400", "600"],
@@ -45,6 +48,7 @@ export default function RootLayout({
             <>
               <ConvexClientProvider>{children}</ConvexClientProvider>
               <ToastProvider />
+              <Toaster />
               <ExitModal />
               <HeartModal />
               <AddBookModal />
