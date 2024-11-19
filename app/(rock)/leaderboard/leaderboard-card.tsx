@@ -22,7 +22,7 @@ const LeaderboardCard = ({
       <p className="font-bold text-lime-700 mr-4">{positon + 1}</p>
       <div className="border bg-green-500 h-12 w-12 mr-2 rounded-full flex items-center justify-center">
         <Avatar>
-          {image && <AvatarImage src={image} />}
+          {/* {image && <AvatarImage src={image} />} */}
           <AvatarFallback className="text-white">
             {avatarFallback}
           </AvatarFallback>

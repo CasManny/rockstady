@@ -1,6 +1,5 @@
 // @ts-nocheck
 "use client";
-import { useGetCalls } from "@/hooks/use-getcalls";
 import { CallRecording } from "@stream-io/node-sdk";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import MeetingCard from "./MeetingCard";
 import { Call } from "@stream-io/video-react-sdk";
 import Loader from "./Loader";
 import { useToast } from "@/hooks/use-toast";
+import { useGetCalls } from "@/hooks/use-getCalls";
 
 interface CallListProps {
   type: "ended" | "upcoming" | "recordings";
