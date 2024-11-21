@@ -23,7 +23,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Rockstaddy",
+  title: "SkillSquare",
   description:
     "Level up your reading game with Rockstady’s engaging book summaries and quizzes.",
 };

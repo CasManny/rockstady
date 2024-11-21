@@ -30,7 +30,7 @@ const UserCommunity = () => {
     return (
         <div className="">
             <CommunityWrapper label="Your Community">
-                <CommunityLink label={"Rockstaddy"} id={rockstaddy?.[0]._id!} icon={HashIcon} />
+                <CommunityLink label={"SkillSquare"} id={rockstaddy?.[0]._id!} icon={HashIcon} />
             </CommunityWrapper>
       </div>
   )

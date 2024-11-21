@@ -25,7 +25,7 @@ const Header = () => {
           <div className="flex items-center gap-1">
             <Mountain className="h-10 w-10 text-[#F3BE00]" />
             <h1 className="font-semibold text-lg sm:text-2xl dark:text-white">
-              Rockstaddy
+              SkillSquare
             </h1>
           </div>
           <div className="items-center gap-5 hidden lg:flex dark:text-rs-text-dark">

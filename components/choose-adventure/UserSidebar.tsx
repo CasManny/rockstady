@@ -54,7 +54,7 @@ const Sidebar = async ({ className }: Props) => {
         <Link href={"/"}>
           <div className="flex items-center gap-1">
             <Mountain className="h-10 w-10 text-[#F3BE00]" />
-            <h1 className="font-semibold text-2xl dark:text-white">Rockstaddy</h1>
+            <h1 className="font-semibold text-2xl dark:text-white">SkillSquare</h1>
           </div>
         </Link>
         <div className="flex flex-col gap-y-2 flex-1 mt-5">

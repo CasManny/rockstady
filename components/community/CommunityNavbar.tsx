@@ -6,8 +6,8 @@ const CommunityNavbar = () => {
   return (
     <nav className="flex-between fixed z-50 w-full px-8 py-4 lg:px-10 border-b bg-white shadow-sm">
       <Link href={"/"} className="flex items-center gap-1">
-        <Mountain className="h-16 w-16 text-rs-yellow" />
-        <p className="text-[26px] text-black max-sm:hidden">Rockstaddy</p>
+        <Mountain className="h-8 w-8 text-rs-yellow" />
+        <p className="text-[26px] text-black max-sm:hidden">SkillSquare</p>
       </Link>
       <div className="flex-between gap-5">
         <SignedIn>

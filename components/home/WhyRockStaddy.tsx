@@ -23,10 +23,11 @@ const benefits = [
     
 ]
 
+
 const WhyRockStaddy = () => {
   return (
       <div className='container min-h-[80vh] p-5 mb:p-10'>
-          <h1 className='text-center text-3xl font-extrabold mb-20 dark:text-white/80'>Why you will Love <br /> <span className='border-b border-dotted border-rs-yellow'>Rockstaddy 👌</span></h1>
+          <h1 className='text-center text-3xl font-extrabold mb-20 dark:text-white/80'>Why you will Love <br /> <span className='border-b border-dotted border-rs-yellow'>SkillSquare 👌</span></h1>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-10">
               {benefits.map((benefit, index) => (
                   <div className="text-center px-10">

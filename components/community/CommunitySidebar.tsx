@@ -12,7 +12,7 @@ const CommunitySidebar = () => {
 
   return (
     <section className="sticky left-0 top-0 flex h-screen  flex-col justify-between p-6  pt-28 max-sm:hidden lg:w-[300px]">
-      <div className="flex flex-1 flex-col gap-6 border-r p-2">
+      <div className="flex flex-1 flex-col gap-6 border-r p-2 w-[300px]">
         {sidebarLinks.map((link) => {
           const isActive = pathname === link.route;
           return (
